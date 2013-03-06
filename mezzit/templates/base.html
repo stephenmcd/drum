@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+{% load pages_tags mezzanine_tags i18n future %}
+<head>
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+<meta name="description" content="{% block meta_description %}{% endblock %}">
+<title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
+
+{% compress css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/mezzanine.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.responsive.css">
+{% endcompress %}
+
+{% compress js %}
+<script src="{{ STATIC_URL }}mezzanine/js/{{ settings.JQUERY_FILENAME }}"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+<script>
+$(function() {
+    $('.middle input:text, textarea').addClass('input-xlarge');
+    $('.control-group label').addClass('control-label');
+});
+</script>
+{% endcompress %}
+<style>
+.btn-new {margin:20px 0 !important;}
+h1 {margin:-10px 0 20px 0}
+#comments h3 {display:none;}
+.rating {float:left; margin-top:-15px;}
+.rating form {display:none !important;}
+.rating i {display:block !important;}
+#comments .rating {margin:0 5px 0 0 !important;}
+.link-view .rating i {float:left; margin:8px 0 0 -4px;}
+.arrows {float:left; margin-top:-5px;}
+.link-item .score {font-size:30px;}
+.score, .arrows {opacity:.6;}
+.link-item {margin:10px 0 25px 0; padding:10px 0; border-bottom:1px solid #eee;}
+.link-meta, .link-detail, #comments {font-size:12px; color:#666;}
+.link-meta .rating {margin:0 10px 0 0;}
+.link-meta {margin:10px 0;}
+.link-item .rating, .link-detail {float:left;}
+.link-item h2 {line-height:15px;}
+
+.link-detail {margin:-25px 0 0 10px;}
+#comment .control-group, .reply-form .control-group {display:none;}
+#comment .input_id_comment, .reply-form .input_id_comment {display:block;}
+
+</style>
+
+{% block extra_head %}{% endblock %}
+
+</head>
+<body id="{% block body_id %}body{% endblock %}">
+
+<div class="navbar">
+<div class="navbar-inner navbar-fixed-top">
+<div class="container">
+    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </a>
+    {% if settings.SITE_TITLE %}<a class="brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
+    {% if settings.SITE_TAGLINE %}<p class="navbar-text">{{ settings.SITE_TAGLINE }}</p>{% endif %}
+    <div class="nav-collapse">
+        {% search_form %}
+    </div>
+</div>
+</div>
+</div>
+
+<div class="container">
+
+{% nevercache %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}" data-alert="alert">
+<a class="close" href="#" onclick="$(this).parent().fadeOut('fast'); return false;">×</a>{{ message }}
+</div>
+{% endfor %}
+{% endnevercache %}
+
+
+<h1>{% block title %}{% endblock %}</h1>
+
+<ul class="breadcrumb">
+{% spaceless %}
+{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
+{% endspaceless %}
+</ul>
+
+</div>
+
+<div class="container">
+<div class="row">
+
+<div class="span9 middle">
+    {% block main %}{% endblock %}
+</div>
+
+<div class="span3 right">
+    {% nevercache %}
+    {% include "includes/user_panel.html" %}
+    {% endnevercache %}
+</div>
+
+</div>
+</div>
+
+<footer>
+<div class="container">
+<p>{% trans "Powered by" %} <a href="http://mezzanine.jupo.org">Mezzanine</a></p>
+</div>
+</footer>
+
+{% include "includes/footer_scripts.html" %}
+
+</body>
+</html>

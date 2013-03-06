@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load mezzanine_tags %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li>Link</li>
+{% endblock %}
+
+{% block main %}
+<form method="post">
+{% csrf_token %}
+{% fields_for link_form %}
+<div class="actions">
+    <input class="btn btn-primary btn-large" type="submit">
+</div>
+</form>
+{% endblock %}

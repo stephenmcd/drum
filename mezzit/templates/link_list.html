@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load mezzanine_tags rating_tags %}
+
+{% block main %}
+
+{% for link in links %}
+<div class="link-item">
+    {% rating_for link %}
+    <div class="link-detail">
+        <h2><a href="{{ link.link }}">{{ link.title }}</a></h2>
+        {{ link.publish_date|timesince }} ago |
+        <a class="comments" href="{{ link.get_absolute_url }}">{{ link.comments_count }} comment{{ link.comments_count|pluralize }} </a>
+    </div>
+    <br clear="left">
+</div>
+{% endfor %}
+
+{% pagination_for links %}
+
+{% endblock %}

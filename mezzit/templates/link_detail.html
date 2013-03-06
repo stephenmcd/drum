@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load mezzanine_tags rating_tags comment_tags %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li>{{ link.title }}</li>
+{% endblock %}
+
+
+{% block main %}
+<div class="link-view">
+    <h1><a href="{{ link.link }}">{{ link.title }}</a></h1>
+    <p>{{ link.description }}</p>
+    <div class="link-meta">
+        {% rating_for link %}
+        Posted by {{ link.user }} {{ link.publish_date|timesince }} ago
+    </div>
+    {% comments_for link %}
+</div>
+{% endblock %}
