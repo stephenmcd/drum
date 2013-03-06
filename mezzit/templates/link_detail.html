@@ -14,7 +14,7 @@
     <p>{{ link.description }}</p>
     <div class="link-meta">
         {% rating_for link %}
-        Posted by {{ link.user }} {{ link.publish_date|timesince }} ago
+        by {{ link.user }} {{ link.publish_date|timesince }} ago
     </div>
     {% comments_for link %}
 </div>

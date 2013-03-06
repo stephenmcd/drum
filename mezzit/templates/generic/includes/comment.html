@@ -1,0 +1,37 @@
+{% load i18n mezzanine_tags comment_tags rating_tags %}
+
+<ul class="unstyled comment-thread">
+    {% for comment in comments_for_thread %}
+    <li id="comment-{{ comment.id }}"{% if comment.by_author %} class="comment-author"{% endif %}>
+    {% if not comment.is_removed and comment.is_public %}
+
+        <p>{{ comment.comment|comment_filter }}</p>
+        {% rating_for comment %}
+        by {{ comment.user_name }} {{ comment.submit_date|timesince }} ago
+        <a href="{{ request.path }}#comment-{{ comment.id }}">Link</a> /
+        <a href="#reply-{{ comment.id }}" class="reply">Reply</a>
+
+        <form class="reply-form" method="post" id="reply-{{ comment.id }}"
+            action="{{ comment_url }}#reply-{{ comment.id }}"
+            {% if replied_to != comment.id %}style="display:none;"{% endif %}>
+            {% if replied_to == comment.id %}
+            {% fields_for posted_comment_form %}
+            {% else %}
+            {% fields_for unposted_comment_form %}
+            {% endif %}
+            <input type="hidden" name="replied_to" value="{{ comment.id }}">
+            <input class="btn btn-primary btn-large" type="submit" value="{% trans "Reply" %}">
+        </form>
+
+    {% else %}
+
+        {% if comment.is_removed %}
+        <p>Deleted</p>
+        {% endif %}
+
+    {% endif %}
+    {% comment_thread comment %}
+    </li>
+    {% endfor %}
+</ul>
+
