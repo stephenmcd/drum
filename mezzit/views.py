@@ -19,6 +19,7 @@ def link_create(request):
     if request.method == "POST" and link_form.is_valid():
         link = link_form.save(commit=False)
         link.user = request.user
+        link.gen_description = False
         link.save()
         return redirect(link)
     return render(request, "link_form.html", {"link_form": link_form})
