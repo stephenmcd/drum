@@ -2,6 +2,8 @@
 
 {% load mezzanine_tags rating_tags comment_tags %}
 
+{% block meta_title %}{{ link.title }}{% endblock %}
+
 {% block breadcrumb_menu %}
 {{ block.super }}
 <li>{{ link.title }}</li>
