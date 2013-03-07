@@ -7,7 +7,7 @@
 
         <p>{{ comment.comment|comment_filter }}</p>
         {% rating_for comment %}
-        by {{ comment.user_name }} {{ comment.submit_date|timesince }} ago
+        by {{ comment.user.username }} {{ comment.submit_date|timesince }} ago
         <a href="{{ request.path }}#comment-{{ comment.id }}">link</a> /
         <a href="#reply-{{ comment.id }}" class="reply">reply</a>
 
