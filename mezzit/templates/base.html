@@ -20,12 +20,12 @@
 {% compress js %}
 <script src="{{ STATIC_URL }}mezzanine/js/{{ settings.JQUERY_FILENAME }}"></script>
 <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+<script src="{{ STATIC_URL }}js/mezzit.js"></script>
 <script>
 $(function() {
     $('.middle input:text, textarea').addClass('input-xlarge');
     $('.control-group label').addClass('control-label');
 });
-
 </script>
 {% endcompress %}
 {% block extra_head %}{% endblock %}
