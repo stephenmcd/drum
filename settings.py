@@ -307,6 +307,16 @@ OPTIONAL_APPS = (
 DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
 
 ###################
+# MEZZIT SETTINGS #
+###################
+
+RATINGS_RANGE = (-1, 1)
+RATINGS_ACCOUNT_REQUIRED = True
+COMMENTS_ACCOUNT_REQUIRED = True
+AUTH_PROFILE_MODULE = "mezzit.Profile"
+ACCOUNTS_PROFILE_VIEWS_ENABLED = True
+
+###################
 # DEPLOY SETTINGS #
 ###################
 

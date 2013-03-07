@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n future mezzanine_tags %}
+
+{% block meta_title %}{{ profile_user.username }}{% endblock %}
+{% block title %}{{ profile_user.username }} ({{ profile_user.get_profile.karma }}){% endblock %}
+{% block body_id %}account{% endblock %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li>{{ profile_user.username }}</li>
+{% endblock %}
+
+{% block main %}
+<div style="float:right;">
+{% if profile_user == request.user %}
+<br><br><a class="btn btn-large btn-primary" style="" href="{% url "profile_update" %}">{% trans "Update profile" %}</a>
+{% endif %}
+</div>
+<div style="float:left;">
+    {{ profile_user.get_profile.bio }}
+</div>
+{% endblock %}
