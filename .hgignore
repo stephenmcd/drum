@@ -4,5 +4,4 @@ syntax: glob
 *.db
 .DS_Store
 local_settings.py
-static
 

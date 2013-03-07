@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/mezzanine.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.responsive.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/mezzit.css">
 {% endcompress %}
 
 {% compress js %}
@@ -24,32 +25,9 @@ $(function() {
     $('.middle input:text, textarea').addClass('input-xlarge');
     $('.control-group label').addClass('control-label');
 });
+
 </script>
 {% endcompress %}
-<style>
-.btn-new {margin:20px 0 !important;}
-h1 {margin:-10px 0 20px 0}
-#comments h3 {display:none;}
-.rating {float:left; margin-top:-15px;}
-.rating form {display:none !important;}
-.rating i {display:block !important;}
-.link-view .rating i {float:left; margin:8px 0 0 -4px;}
-.arrows {float:left; margin-top:-5px;}
-.link-item .score {font-size:30px;}
-.score, .arrows {opacity:.6;}
-.link-item {margin:10px 0 25px 0; padding:10px 0; border-bottom:1px solid #eee;}
-.link-meta, .link-detail, #comments {font-size:12px; color:#666;}
-#comments .rating, .link-meta .rating {margin:0 5px 0 0 !important;}
-.link-meta {margin:10px 0;}
-.link-item h2 {line-height:15px;}
-.link-detail {margin:-25px 0 0 10px;}
-#comment .control-group, .reply-form .control-group {display:none;}
-#comment .input_id_comment, .reply-form .input_id_comment {display:block;}
-#comments li {padding:2px 0 2px 10px; border-width:1px 0 0 0; background:none; margin:0;}
-.comment-thread {margin:0; padding:0 0 0 10px !important;}
-
-</style>
-
 {% block extra_head %}{% endblock %}
 
 </head>
