@@ -5,3 +5,4 @@ syntax: glob
 .DS_Store
 local_settings.py
 
+*.pid
