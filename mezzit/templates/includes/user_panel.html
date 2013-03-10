@@ -1,8 +1,0 @@
-{% load future %}
-
-<div class="panel">
-    {% include "accounts/includes/user_panel.html" %}
-    {% if request.user.is_authenticated and request.path != "/link/create/" %}
-    <a class="btn btn-action btn-large btn-primary btn-new" href="{% url "link_create" %}">Submit New Link</a>
-    {% endif %}
-</div>

@@ -3,16 +3,10 @@
 {% load mezzanine_tags rating_tags comment_tags %}
 
 {% block meta_title %}{{ link.title }}{% endblock %}
-
-{% block breadcrumb_menu %}
-{{ block.super }}
-<li>{{ link.title }}</li>
-{% endblock %}
-
+{% block title %}<a href="{{ link.link }}">{{ link.title }}</a>{% endblock %}
 
 {% block main %}
 <div class="link-view">
-    <h1><a href="{{ link.link }}">{{ link.title }}</a></h1>
     <p>{{ link.description }}</p>
     <div class="link-meta">
         {% rating_for link %}

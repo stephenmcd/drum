@@ -1,17 +1,12 @@
 {% extends "base.html" %}
 
-{% block meta_title %}Add Link{% endblock %}
+{% block meta_title %}New Link{% endblock %}
+{% block title %}New Link{% endblock %}
 
 {% load mezzanine_tags %}
 
-{% block breadcrumb_menu %}
-{{ block.super }}
-<li>Link</li>
-{% endblock %}
-
 {% block main %}
 <form method="post">
-{% csrf_token %}
 {% fields_for link_form %}
 <div class="actions">
     <input class="btn btn-primary btn-large" type="submit">

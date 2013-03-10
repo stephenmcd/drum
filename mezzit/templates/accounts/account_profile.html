@@ -5,18 +5,15 @@
 {% block title %}{{ profile_user.username }} ({{ profile_user.get_profile.karma }}){% endblock %}
 {% block body_id %}account{% endblock %}
 
-{% block breadcrumb_menu %}
-{{ block.super }}
-<li>{{ profile_user.username }}</li>
-{% endblock %}
-
 {% block main %}
-<div style="float:right;">
 {% if profile_user == request.user %}
-<br><br><a class="btn btn-large btn-primary" style="" href="{% url "profile_update" %}">{% trans "Update profile" %}</a>
-{% endif %}
+<div class="pull-right">
+    <a class="btn btn-large btn-primary" href="{% url "profile_update" %}">Update profile</a>
 </div>
-<div style="float:left;">
-    {{ profile_user.get_profile.bio }}
+{% endif %}
+<div class="clearfix">
+    <p>{{ profile_user.get_profile.bio }}</p>
+    <a href="{% url "user_comments" profile_user.username %}">comments</a> |
+    <a href="{% url "user_links" profile_user.username %}">links</a>
 </div>
 {% endblock %}
