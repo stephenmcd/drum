@@ -7,8 +7,9 @@
 
         <p>{{ comment.comment|comment_filter }}</p>
         {% rating_for comment %}
-        by {{ comment.user.username }} {{ comment.submit_date|timesince }} ago
-        <a href="{{ request.path }}#comment-{{ comment.id }}">link</a> /
+        by <a href="{% url "profile" comment.user.username %}">{{ comment.user.username }}</a>
+        {{ comment.submit_date|timesince }} ago |
+        <a href="{{ request.path }}#comment-{{ comment.id }}">link</a> |
         <a href="#reply-{{ comment.id }}" class="reply">reply</a>
 
         <form class="reply-form" method="post" id="reply-{{ comment.id }}"
