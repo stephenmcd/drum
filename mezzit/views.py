@@ -14,7 +14,8 @@ PAGING = (settings.ITEMS_PER_PAGE, settings.MAX_PAGING_LINKS)
 
 
 def link_detail(request, slug, template="link_detail.html"):
-    context = {"link": get_object_or_404(Link, slug=slug)}
+    queryset = Link.objects.select_related("user")
+    context = {"link": get_object_or_404(queryset, slug=slug)}
     return render(request, template, context)
 
 
@@ -45,7 +46,7 @@ def link_edit(request, slug, template="link_form.html"):
 
 def link_list(request, template="link_list.html"):
     page = request.GET.get("page", 1)
-    links = paginate(Link.objects.all(), page, *PAGING)
+    links = paginate(Link.objects.select_related("user"), page, *PAGING)
     context = {"links": links}
     return render(request, template, context)
 

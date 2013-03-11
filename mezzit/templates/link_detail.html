@@ -10,7 +10,8 @@
     <p>{{ link.description }}</p>
     <div class="link-meta">
         {% rating_for link %}
-        by {{ link.user }} {{ link.publish_date|timesince }} ago
+        by <a href="{% url "profile" link.user.username %}">{{ link.user.username }}</a>
+        {{ link.publish_date|timesince }} ago
     </div>
     {% comments_for link %}
 </div>
