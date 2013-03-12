@@ -1,4 +1,6 @@
 
+from time import time
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect
@@ -45,8 +47,9 @@ def link_edit(request, slug, template="link_form.html"):
 
 
 def link_list(request, template="link_list.html"):
+    queryset = Link.objects.by_score()
     page = request.GET.get("page", 1)
-    links = paginate(Link.objects.select_related("user"), page, *PAGING)
+    links = paginate(queryset, page, *PAGING)
     context = {"links": links}
     return render(request, template, context)
 
