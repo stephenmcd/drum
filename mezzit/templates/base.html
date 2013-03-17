@@ -42,8 +42,8 @@
     {% if settings.SITE_TITLE %}<a class="brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
     <ul class="nav">
         <li class="divider-vertical"></li>
-        <li><a href="{% url "latest_links" %}">Newest</a></li>
-        <li><a href="">Comments</a></li>
+        <li><a href="{% url "link_list_latest" %}">Newest</a></li>
+        <li><a href="{% url "comment_list_latest" %}">Comments</a></li>
     </ul>
     <div class="nav-collapse">
         <div class="pull-right">

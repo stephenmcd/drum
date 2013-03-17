@@ -2,7 +2,8 @@
 
 {% load mezzanine_tags rating_tags %}
 
-{% block meta_title %}Home{% endblock %}
+{% block meta_title %}{{ title|default:"Home" }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block main %}
 

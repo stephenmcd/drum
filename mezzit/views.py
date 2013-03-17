@@ -46,32 +46,43 @@ def link_edit(request, slug, template="link_form.html"):
     return render(request, template, context)
 
 
-def link_list(request, by_score=True, template="link_list.html"):
+def link_list(request, username=None, by_score=True, template="link_list.html"):
     links = Link.objects.select_related("user")
+    profile_user = None
+    title = ""
+    if username:
+        user_lookup = {"username__iexact": username, "is_active": True}
+        profile_user = get_object_or_404(User, **user_lookup)
+        links = links.filter(user=profile_user)
     if by_score:
         links = order_by_score(links, "publish_date")
     else:
         links = links.order_by("-publish_date")
-    page = request.GET.get("page", 1)
-    context = {"links": paginate(links, page, *PAGING)}
+        if profile_user:
+            title = "Links for %s" % profile_user
+        else:
+            title = "Newest"
+    context = {
+        "links": paginate(links, request.GET.get("page", 1), *PAGING),
+        "profile_user": profile_user,
+        "title": title,
+    }
     return render(request, template, context)
 
 
-def user_links(request, username, template="user_links.html"):
-    profile_user = get_object_or_404(User, username__iexact=username,
-                                     is_active=True)
-    page = request.GET.get("page", 1)
-    links = Link.objects.filter(user=profile_user)
-    links = paginate(links.order_by("-publish_date"), page, *PAGING)
-    context = {"links": links, "profile_user": profile_user}
-    return render(request, template, context)
-
-
-def user_comments(request, username, template="user_comments.html"):
-    profile_user = get_object_or_404(User, username__iexact=username,
-                                     is_active=True)
-    page = request.GET.get("page", 1)
-    comments = ThreadedComment.objects.filter(user=profile_user)
-    comments = paginate(comments.order_by("-submit_date"), page, *PAGING)
-    context = {"comments": comments, "profile_user": profile_user}
+def comment_list(request, username=None, template="comment_list.html"):
+    comments = ThreadedComment.objects.select_related("user")
+    profile_user = None
+    title = "Latest comments"
+    if username:
+        user_lookup = {"username__iexact": username, "is_active": True}
+        profile_user = get_object_or_404(User, **user_lookup)
+        comments = comments.filter(user=profile_user)
+        title = "Comments for %s" % profile_user
+    comments = comments.order_by("-submit_date")
+    context = {
+        "comments": paginate(comments, request.GET.get("page", 1), *PAGING),
+        "profile_user": profile_user,
+        "title": title,
+    }
     return render(request, template, context)

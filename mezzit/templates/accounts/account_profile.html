@@ -13,7 +13,7 @@
 {% endif %}
 <div class="clearfix">
     <p>{{ profile_user.get_profile.bio }}</p>
-    <a href="{% url "user_comments" profile_user.username %}">comments</a> |
-    <a href="{% url "user_links" profile_user.username %}">links</a>
+    <a href="{% url "comment_list_user" profile_user.username %}">comments</a> |
+    <a href="{% url "link_list_user" profile_user.username %}">links</a>
 </div>
 {% endblock %}
