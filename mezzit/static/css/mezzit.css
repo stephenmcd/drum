@@ -1,6 +1,7 @@
 
 /* Main page title */
 h1 {margin:0 0 20px 0; border-bottom:1px solid #eee;}
+h1, h2 {font-size:24px;}
 
 /* Redundant Mezzanine titles */
 #comments h3, legend {display:none;}

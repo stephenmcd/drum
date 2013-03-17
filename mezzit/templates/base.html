@@ -40,7 +40,11 @@
         <span class="icon-bar"></span>
     </a>
     {% if settings.SITE_TITLE %}<a class="brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
-    {% if settings.SITE_TAGLINE %}<p class="navbar-text">{{ settings.SITE_TAGLINE }}</p>{% endif %}
+    <ul class="nav">
+        <li class="divider-vertical"></li>
+        <li><a href="{% url "latest_links" %}">Newest</a></li>
+        <li><a href="">Comments</a></li>
+    </ul>
     <div class="nav-collapse">
         <div class="pull-right">
             <a class="btn btn-small btn-primary" href="{% url "link_create" %}">New Link</a>

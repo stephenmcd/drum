@@ -1,5 +1,4 @@
 
-from time import time
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -10,14 +9,15 @@ from mezzanine.utils.views import render, paginate
 
 from .models import Link
 from .forms import LinkForm
+from .utils import order_by_score
 
 
 PAGING = (settings.ITEMS_PER_PAGE, settings.MAX_PAGING_LINKS)
 
 
 def link_detail(request, slug, template="link_detail.html"):
-    queryset = Link.objects.select_related("user")
-    context = {"link": get_object_or_404(queryset, slug=slug)}
+    links = Link.objects.select_related("user")
+    context = {"link": get_object_or_404(links, slug=slug)}
     return render(request, template, context)
 
 
@@ -36,8 +36,8 @@ def link_create(request, template="link_form.html"):
 
 @login_required
 def link_edit(request, slug, template="link_form.html"):
-    queryset = Link.objects.published(for_user=request.user)
-    link = get_object_or_404(queryset, slug=slug)
+    links = Link.objects.published(for_user=request.user)
+    link = get_object_or_404(links, slug=slug)
     link_form = LinkForm(request.POST or None, instance=link)
     if request.method == "POST" and link_form.is_valid():
         link = link_form.save()
@@ -46,11 +46,14 @@ def link_edit(request, slug, template="link_form.html"):
     return render(request, template, context)
 
 
-def link_list(request, template="link_list.html"):
-    queryset = Link.objects.by_score()
+def link_list(request, by_score=True, template="link_list.html"):
+    links = Link.objects.select_related("user")
+    if by_score:
+        links = order_by_score(links, "publish_date")
+    else:
+        links = links.order_by("-publish_date")
     page = request.GET.get("page", 1)
-    links = paginate(queryset, page, *PAGING)
-    context = {"links": links}
+    context = {"links": paginate(links, page, *PAGING)}
     return render(request, template, context)
 
 
