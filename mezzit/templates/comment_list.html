@@ -2,8 +2,8 @@
 
 {% load mezzanine_tags rating_tags %}
 
-{% block meta_title %}{{ profile_user.username }}{% endblock %}
-{% block title %}Comments for {{ profile_user.username }}{% endblock %}
+{% block meta_title %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block main %}
 
@@ -11,7 +11,8 @@
 <div class="link-item">
     <div class="link-detail">
         <p>{{ comment.comment }}</p>
-        {{ comment.submit_date|timesince }} ago | in
+        by <a href="{% url "profile" comment.user.username %}">{{ comment.user.username }}</a>
+        {{ comment.submit_date|timesince }} ago in
         <a class="comments" href="{{ comment.get_absolute_url }}">{{ comment.content_object }}</a>
     </div>
     <br clear="left">

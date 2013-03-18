@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load mezzanine_tags rating_tags comment_tags %}
+{% load mezzanine_tags rating_tags comment_tags mezzit_tags %}
 
 {% block meta_title %}{{ link.title }}{% endblock %}
 {% block title %}<a href="{{ link.link }}">{{ link.title }}</a>{% endblock %}
@@ -13,6 +13,7 @@
         by <a href="{% url "profile" link.user.username %}">{{ link.user.username }}</a>
         {{ link.publish_date|timesince }} ago
     </div>
+    {% order_comments_by_score_for link %}
     {% comments_for link %}
 </div>
 {% endblock %}
