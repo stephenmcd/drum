@@ -30,4 +30,3 @@ def order_by_score(queryset, date_field, reverse=True, db_scoring=True):
             score = obj.rating_sum / pow(age, scale)
             setattr(obj, "score", score)
         return sorted(queryset, key=lambda obj: obj.score, reverse=reverse)
-
