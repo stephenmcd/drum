@@ -34,18 +34,6 @@ def link_create(request, template="link_form.html"):
     return render(request, template, context)
 
 
-@login_required
-def link_edit(request, slug, template="link_form.html"):
-    links = Link.objects.published(for_user=request.user)
-    link = get_object_or_404(links, slug=slug)
-    link_form = LinkForm(request.POST or None, instance=link)
-    if request.method == "POST" and link_form.is_valid():
-        link = link_form.save()
-        return redirect(link)
-    context = {"link_form": link_form}
-    return render(request, template, context)
-
-
 def link_list(request, username=None, by_score=True, template="link_list.html"):
     links = Link.objects.select_related("user")
     profile_user = None
