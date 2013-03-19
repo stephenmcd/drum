@@ -11,6 +11,10 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def order_comments_by_score_for(context, parent):
+    """
+    Preloads threaded comments in the same way Mezzanine initially does,
+    but here we order them by score.
+    """
     comments = defaultdict(list)
     comments_queryset = parent.comments.visible().select_related("user")
     for comment in order_by_score(comments_queryset, "submit_date"):

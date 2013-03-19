@@ -4,6 +4,15 @@ from django.utils.timezone import now
 
 
 def order_by_score(queryset, date_field, reverse=True, db_scoring=True):
+    """
+    Take some queryset (links or comments) and orders them by score,
+    which is basically "rating_sum / age_in_seconds ^ scale", where
+    scale is a constant that can be used to control how quickly scores
+    reduce over time. To perform this in the database, it needs to
+    support a POW function, which Postgres and MySQL do. For databases
+    that don't such as SQLite, we perform the scoring/sorting in
+    memory, which will suffice for development.
+    """
 
     scale = getattr(settings, "SCORE_SCALE_FACTOR", 2)
 
