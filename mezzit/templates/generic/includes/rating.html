@@ -3,10 +3,7 @@
 <div class="rating">
 
     <form method="post" action="{% url "rating" %}">
-        {% nevercache %}
-        {% csrf_token %}
-        {% endnevercache %}
-        {{ rating_form.as_p }}
+        {% fields_for rating_form %}
     </form>
 
     <span class="arrows">
