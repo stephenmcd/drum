@@ -11,7 +11,7 @@
 <div class="link-item clearfix">
     {% rating_for link %}
     <div class="link-detail">
-        <h2><a href="{{ link.link }}">{{ link.title }} ({{ link.score }})</a></h2>
+        <h2><a href="{{ link.link }}">{{ link.title }}</a></h2>
         by <a href="{% url "profile" link.user.username %}">{{ link.user.username }}</a>
         {{ link.publish_date|timesince }} ago |
         <a class="comments" href="{{ link.get_absolute_url }}">{{ link.comments_count }} comment{{ link.comments_count|pluralize }} </a>
