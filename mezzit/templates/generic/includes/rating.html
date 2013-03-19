@@ -2,21 +2,19 @@
 
 <div class="rating">
 
-<form method="post" action="{% url "rating" %}">
-    {% nevercache %}
-    {% csrf_token %}
-    {% endnevercache %}
-    {{ rating_form.as_p }}
-</form>
+    <form method="post" action="{% url "rating" %}">
+        {% nevercache %}
+        {% csrf_token %}
+        {% endnevercache %}
+        {{ rating_form.as_p }}
+    </form>
 
-<span class="arrows">
-    <a href="#"><i class="icon icon-arrow-up"></i></a>
-    <a href="#"><i class="icon icon-arrow-down"></i></a>
-</span>
-<span class="score">
-    {{ rating_sum }}
-</span>
+    <span class="arrows">
+        <a href="#"><i class="icon icon-arrow-up"></i></a>
+        <a href="#"><i class="icon icon-arrow-down"></i></a>
+    </span>
 
+    <span class="score">{{ rating_sum }}</span>
 
 </div>
 
