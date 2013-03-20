@@ -10,7 +10,6 @@ class Link(Displayable, Ownable):
 
     link = models.URLField()
     rating = RatingField()
-    seconds = models.FloatField(default=time)
     comments = CommentsField()
 
     @models.permalink
