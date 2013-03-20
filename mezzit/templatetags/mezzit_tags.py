@@ -16,8 +16,8 @@ def order_comments_by_score_for(context, parent):
     but here we order them by score.
     """
     comments = defaultdict(list)
-    comments_queryset = parent.comments.visible().select_related("user")
-    for comment in order_by_score(comments_queryset, "submit_date"):
+    qs = parent.comments.visible().select_related("user", "user__profile")
+    for comment in order_by_score(qs, "submit_date"):
         comments[comment.replied_to_id].append(comment)
     context["all_comments"] = comments
     return ""

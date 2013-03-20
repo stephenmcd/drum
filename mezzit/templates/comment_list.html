@@ -11,7 +11,8 @@
 <div class="link-item">
     <div class="link-detail">
         <p>{{ comment.comment }}</p>
-        by <a href="{% url "profile" comment.user.username %}">{{ comment.user.username }}</a>
+        by <a href="{% url "profile" comment.user.username %}">{{ comment.user.username }}
+            ({{ comment.user.get_profile.karma }})</a>
         {{ comment.submit_date|timesince }} ago in
         <a class="comments" href="{{ comment.get_absolute_url }}">{{ comment.content_object }}</a>
     </div>

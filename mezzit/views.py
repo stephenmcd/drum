@@ -16,7 +16,7 @@ PAGING = (settings.ITEMS_PER_PAGE, settings.MAX_PAGING_LINKS)
 
 
 def link_detail(request, slug, template="link_detail.html"):
-    links = Link.objects.select_related("user")
+    links = Link.objects.select_related("user", "user__profile")
     context = {"link": get_object_or_404(links, slug=slug)}
     return render(request, template, context)
 
@@ -35,7 +35,7 @@ def link_create(request, template="link_form.html"):
 
 
 def link_list(request, username=None, by_score=True, template="link_list.html"):
-    links = Link.objects.select_related("user")
+    links = Link.objects.select_related("user", "user__profile")
     profile_user = None
     title = ""
     if username:
