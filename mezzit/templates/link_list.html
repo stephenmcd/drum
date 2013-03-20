@@ -17,6 +17,8 @@
         <a class="comments" href="{{ link.get_absolute_url }}">{{ link.comments_count }} comment{{ link.comments_count|pluralize }} </a>
     </div>
 </div>
+{% empty %}
+<p>Whoa, there's like, literally no data here, like seriously, I totally got nothin.</p>
 {% endfor %}
 
 {% pagination_for links %}
