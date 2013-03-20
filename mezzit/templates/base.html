@@ -42,8 +42,10 @@
     {% if settings.SITE_TITLE %}<a class="brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
     <ul class="nav">
         <li class="divider-vertical"></li>
-        <li><a href="{% url "link_list_latest" %}">Newest</a></li>
-        <li><a href="{% url "comment_list_latest" %}">Comments</a></li>
+        {% url "link_list_latest" as link_list_latest %}
+        {% url "comment_list_latest" as comment_list_latest %}
+        <li{% if request.path == link_list_latest %} class="active"{% endif %}><a href="{{ link_list_latest }}">Newest</a></li>
+        <li{% if request.path == comment_list_latest %} class="active"{% endif %}><a href="{{ comment_list_latest }}">Comments</a></li>
     </ul>
     <div class="nav-collapse">
         <div class="pull-right">
