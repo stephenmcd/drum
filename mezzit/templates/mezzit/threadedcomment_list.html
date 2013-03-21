@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load mezzanine_tags rating_tags future %}
+
+{% block meta_title %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block main %}
+
+{% for comment in object_list %}
+<div class="link-item">
+    <div class="link-detail">
+        <p>{{ comment.comment }}</p>
+        by <a href="{% url "profile" comment.user.username %}">{{ comment.user.username }}
+            ({{ comment.user.get_profile.karma }})</a>
+        {{ comment.submit_date|timesince }} ago in
+        <a class="comments" href="{{ comment.get_absolute_url }}">{{ comment.content_object }}</a>
+    </div>
+    <br clear="left">
+</div>
+{% empty %}
+<p>Whoa, there's like, literally no data here, like seriously, I totally got nothin.</p>
+{% endfor %}
+
+{% pagination_for object_list %}
+
+{% endblock %}

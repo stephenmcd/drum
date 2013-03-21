@@ -7,7 +7,7 @@
 
 {% block main %}
 
-{% for link in links %}
+{% for link in object_list %}
 <div class="link-item clearfix">
     {% rating_for link %}
     <div class="link-detail">
@@ -21,6 +21,6 @@
 <p>Whoa, there's like, literally no data here, like seriously, I totally got nothin.</p>
 {% endfor %}
 
-{% pagination_for links %}
+{% pagination_for object_list %}
 
 {% endblock %}

@@ -7,7 +7,7 @@
 
 {% block main %}
 
-{% for comment in comments %}
+{% for comment in object_list %}
 <div class="link-item">
     <div class="link-detail">
         <p>{{ comment.comment }}</p>
@@ -22,6 +22,6 @@
 <p>Whoa, there's like, literally no data here, like seriously, I totally got nothin.</p>
 {% endfor %}
 
-{% pagination_for comments %}
+{% pagination_for object_list %}
 
 {% endblock %}

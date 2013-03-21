@@ -1,76 +1,83 @@
 
-
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView, CreateView, DetailView
+
 from mezzanine.conf import settings
 from mezzanine.generic.models import ThreadedComment
-from mezzanine.utils.views import render, paginate
+from mezzanine.utils.views import paginate
 
 from .models import Link
 from .forms import LinkForm
-from .utils import order_by_score
+from .utils import order_by_score, with_users
 
 
-PAGING = (settings.ITEMS_PER_PAGE, settings.MAX_PAGING_LINKS)
+class ScoredView(ListView):
 
-
-def link_detail(request, slug, template="link_detail.html"):
-    links = Link.objects.select_related("user", "user__profile")
-    context = {"link": get_object_or_404(links, slug=slug)}
-    return render(request, template, context)
-
-
-@login_required
-def link_create(request, template="link_form.html"):
-    link_form = LinkForm(request.POST or None)
-    if request.method == "POST" and link_form.is_valid():
-        link = link_form.save(commit=False)
-        link.user = request.user
-        link.gen_description = False
-        link.save()
-        return redirect(link)
-    context = {"link_form": link_form}
-    return render(request, template, context)
-
-
-def link_list(request, username=None, by_score=True, template="link_list.html"):
-    links = Link.objects.select_related("user", "user__profile")
-    profile_user = None
-    title = ""
-    if username:
-        user_lookup = {"username__iexact": username, "is_active": True}
-        profile_user = get_object_or_404(User, **user_lookup)
-        links = links.filter(user=profile_user)
-    if by_score:
-        links = order_by_score(links, "publish_date")
-    else:
-        links = links.order_by("-publish_date")
-        if profile_user:
-            title = "Links for %s" % profile_user
+     def get_context_data(self, **kwargs):
+        context = super(ScoredView, self).get_context_data(**kwargs)
+        context["by_score"] = self.kwargs.get("by_score", True)
+        try:
+            username = self.kwargs["username"]
+        except KeyError:
+            context["profile_user"] = None
         else:
-            title = "Newest"
-    context = {
-        "links": paginate(links, request.GET.get("page", 1), *PAGING),
-        "profile_user": profile_user,
-        "title": title,
-    }
-    return render(request, template, context)
+            user_lookup = {"username__iexact": username, "is_active": True}
+            context["profile_user"] = get_object_or_404(User, **user_lookup)
+        object_list = context.pop("object_list")
+        if context["profile_user"]:
+            object_list = object_list.filter(user=context["profile_user"])
+        if context["by_score"]:
+            object_list = order_by_score(object_list, self.date_field)
+        else:
+            object_list = object_list.order_by("-" + self.date_field)
+        context["object_list"] = paginate(
+            object_list,
+            self.request.GET.get("page", 1),
+            settings.ITEMS_PER_PAGE,
+            settings.MAX_PAGING_LINKS,
+        )
+        context["title"] = self.get_title(context)
+        return context
 
 
-def comment_list(request, username=None, template="comment_list.html"):
-    comments = ThreadedComment.objects.select_related("user")
-    profile_user = None
-    title = "Latest comments"
-    if username:
-        user_lookup = {"username__iexact": username, "is_active": True}
-        profile_user = get_object_or_404(User, **user_lookup)
-        comments = comments.filter(user=profile_user)
-        title = "Comments for %s" % profile_user
-    comments = comments.order_by("-submit_date")
-    context = {
-        "comments": paginate(comments, request.GET.get("page", 1), *PAGING),
-        "profile_user": profile_user,
-        "title": title,
-    }
-    return render(request, template, context)
+class LinkList(ScoredView):
+
+    queryset = with_users(Link.objects.published())
+    date_field = "publish_date"
+
+    def get_title(self, context):
+        if self.kwargs.get("by_score", True):
+            return ""
+        if context["profile_user"]:
+            return "Links by %s" % context["profile_user"]
+        else:
+            return "Newest"
+
+
+class CommentList(ScoredView):
+
+    queryset = with_users(ThreadedComment.objects.visible())
+    date_field = "submit_date"
+
+    def get_title(self, context):
+        if context["profile_user"]:
+            return "Comments by %s" % context["profile_user"]
+        else:
+            return "Latest comments"
+
+
+class LinkCreate(CreateView):
+
+    form_class = LinkForm
+    model = Link
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.gen_description = False
+        return super(LinkCreate, self).form_valid(form)
+
+
+class LinkDetail(DetailView):
+
+    queryset = with_users(Link.objects.published())
