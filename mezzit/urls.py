@@ -23,5 +23,6 @@ urlpatterns = patterns("mezzit.views",
         {"by_score": False},
         name="link_list_user"),
     url("^users/(?P<username>.*)/comments/$", CommentList.as_view(),
+        {"by_score": False},
         name="comment_list_user"),
 )

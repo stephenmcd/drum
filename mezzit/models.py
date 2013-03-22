@@ -4,6 +4,7 @@ from time import time
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 from mezzanine.core.models import Displayable, Ownable
 from mezzanine.generic.models import Rating
 from mezzanine.generic.fields import RatingField, CommentsField
