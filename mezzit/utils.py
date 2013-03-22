@@ -3,14 +3,6 @@ from django.conf import settings
 from django.utils.timezone import now
 
 
-def with_users(queryset):
-    """
-    Wraps the queryset with select_related args for loading users
-    and their profiles when querying links and comments.
-    """
-    return queryset.select_related("user", "user__profile")
-
-
 def order_by_score(queryset, date_field, reverse=True, db_scoring=True):
     """
     Take some queryset (links or comments) and orders them by score,

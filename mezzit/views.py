@@ -9,7 +9,7 @@ from mezzanine.utils.views import paginate
 
 from .models import Link
 from .forms import LinkForm
-from .utils import order_by_score, with_users
+from .utils import order_by_score
 
 
 class ScoredView(ListView):
@@ -42,9 +42,12 @@ class ScoredView(ListView):
         return context
 
 
-class LinkList(ScoredView):
+class LinkView(object):
+    queryset = Link.objects.published().select_related("user", "user__profile")
 
-    queryset = with_users(Link.objects.published())
+
+class LinkList(LinkView, ScoredView):
+
     date_field = "publish_date"
 
     def get_title(self, context):
@@ -54,19 +57,6 @@ class LinkList(ScoredView):
             return "Links by %s" % context["profile_user"].profile
         else:
             return "Newest"
-
-
-class CommentList(ScoredView):
-
-    queryset = with_users(ThreadedComment.objects.visible())
-    date_field = "submit_date"
-
-    def get_title(self, context):
-        if context["profile_user"]:
-            return "Comments by %s" % context["profile_user"].profile
-        else:
-            return "Latest comments"
-
 
 class LinkCreate(CreateView):
 
@@ -79,6 +69,20 @@ class LinkCreate(CreateView):
         return super(LinkCreate, self).form_valid(form)
 
 
-class LinkDetail(DetailView):
+class LinkDetail(LinkView, DetailView):
+    pass
 
-    queryset = with_users(Link.objects.published())
+
+class CommentList(ScoredView):
+
+    queryset = ThreadedComment.objects.visible() \
+        .select_related("user", "user__profile") \
+        .prefetch_related("content_object")
+    date_field = "submit_date"
+
+    def get_title(self, context):
+        if context["profile_user"]:
+            return "Comments by %s" % context["profile_user"].profile
+        else:
+            return "Latest comments"
+
