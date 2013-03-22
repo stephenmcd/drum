@@ -28,7 +28,7 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=Rating)
-def karam(sender, instance, **kwargs):
+def karma(sender, instance, **kwargs):
     """
     Each time a rating is saved, check its value and modify the
     profile karma for the related object's user accordingly.
