@@ -27,6 +27,9 @@ class Profile(models.Model):
     bio = models.TextField()
     karma = models.IntegerField(default=0, editable=False)
 
+    def __unicode__(self):
+        return "%s (%s)" % (self.user, self.karma)
+
 
 @receiver(post_save, sender=Rating)
 def karma(sender, instance, **kwargs):

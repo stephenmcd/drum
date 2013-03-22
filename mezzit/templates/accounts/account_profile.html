@@ -2,7 +2,7 @@
 {% load i18n future mezzanine_tags %}
 
 {% block meta_title %}{{ profile_user.username }}{% endblock %}
-{% block title %}{{ profile_user.username }} ({{ profile_user.get_profile.karma }}){% endblock %}
+{% block title %}{{ profile_user.profile }}{% endblock %}
 {% block body_id %}account{% endblock %}
 
 {% block main %}
@@ -12,7 +12,7 @@
 </div>
 {% endif %}
 <div class="clearfix">
-    <p>{{ profile_user.get_profile.bio }}</p>
+    <p>{{ profile_user.profile.bio }}</p>
     <a href="{% url "comment_list_user" profile_user.username %}">comments</a> |
     <a href="{% url "link_list_user" profile_user.username %}">links</a>
 </div>

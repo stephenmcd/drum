@@ -18,8 +18,7 @@
 <ul class="nav pull-right">
     {% url "profile" request.user.username as profile_url %}
     {% if not profile_url %}{% url "profile_update" as profile_url %}{% endif %}
-    <li><a href="{{ profile_url }}">{{ request.user.username }}
-        ({{ request.user.get_profile.karma }})</a></li>
+    <li><a href="{{ profile_url }}">{{ request.user.profile }}</a></li>
 </ul>
 {% endif %}
 

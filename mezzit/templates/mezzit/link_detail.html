@@ -10,8 +10,7 @@
     <p>{{ object.description }}</p>
     <div class="link-meta">
         {% rating_for object %}
-        by <a href="{% url "profile" object.user.username %}">{{ object.user.username }}
-            ({{ object.user.get_profile.karma }})</a>
+        by <a href="{% url "profile" object.user.username %}">{{ object.user.profile }}</a>
         {{ object.publish_date|timesince }} ago
     </div>
     {% order_comments_by_score_for object %}

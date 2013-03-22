@@ -22,8 +22,9 @@ class ScoredView(ListView):
         except KeyError:
             context["profile_user"] = None
         else:
+            users = User.objects.select_related("profile")
             user_lookup = {"username__iexact": username, "is_active": True}
-            context["profile_user"] = get_object_or_404(User, **user_lookup)
+            context["profile_user"] = get_object_or_404(users, **user_lookup)
         object_list = context.pop("object_list")
         if context["profile_user"]:
             object_list = object_list.filter(user=context["profile_user"])
@@ -50,7 +51,7 @@ class LinkList(ScoredView):
         if self.kwargs.get("by_score", True):
             return ""
         if context["profile_user"]:
-            return "Links by %s" % context["profile_user"]
+            return "Links by %s" % context["profile_user"].profile
         else:
             return "Newest"
 
@@ -62,7 +63,7 @@ class CommentList(ScoredView):
 
     def get_title(self, context):
         if context["profile_user"]:
-            return "Comments by %s" % context["profile_user"]
+            return "Comments by %s" % context["profile_user"].profile
         else:
             return "Latest comments"
 

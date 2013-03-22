@@ -7,8 +7,7 @@
 
         <p>{{ comment.comment|comment_filter }}</p>
         {% rating_for comment %}
-        by <a href="{% url "profile" comment.user.username %}">{{ comment.user.username }}
-            ({{ comment.user.get_profile.karma }})</a>
+        by <a href="{% url "profile" comment.user.username %}">{{ comment.user.profile }}</a>
         {{ comment.submit_date|timesince }} ago |
         <a href="{{ request.path }}#comment-{{ comment.id }}">link</a> |
         <a href="#reply-{{ comment.id }}" class="reply">reply</a>
