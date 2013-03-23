@@ -12,22 +12,30 @@ from .forms import LinkForm
 from .utils import order_by_score
 
 
-class ScoredView(ListView):
+class UserView(ListView):
 
-     def get_context_data(self, **kwargs):
-        context = super(ScoredView, self).get_context_data(**kwargs)
-        context["by_score"] = self.kwargs.get("by_score", True)
+    def get_context_data(self, **kwargs):
+        context = super(UserView, self).get_context_data(**kwargs)
         try:
             username = self.kwargs["username"]
         except KeyError:
-            context["profile_user"] = None
+            profile_user = None
         else:
             users = User.objects.select_related("profile")
-            user_lookup = {"username__iexact": username, "is_active": True}
-            context["profile_user"] = get_object_or_404(users, **user_lookup)
-        object_list = context.pop("object_list")
-        if context["profile_user"]:
-            object_list = object_list.filter(user=context["profile_user"])
+            lookup = {"username__iexact": username, "is_active": True}
+            profile_user = get_object_or_404(users, **lookup)
+            object_list = context["object_list"].filter(user=profile_user)
+            context["object_list"] = object_list
+        context["profile_user"] = profile_user
+        return context
+
+
+class ScoredView(UserView):
+
+     def get_context_data(self, **kwargs):
+        context = super(ScoredView, self).get_context_data(**kwargs)
+        object_list = context["object_list"]
+        context["by_score"] = self.kwargs.get("by_score", True)
         if context["by_score"]:
             object_list = order_by_score(object_list, self.date_field)
         else:
