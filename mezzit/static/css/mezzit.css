@@ -1,3 +1,10 @@
+body {
+  background-color: #fff;
+}
+
+footer {
+  background: none;
+}
 
 /* Main page title */
 h1 {margin:0 0 20px 0; border-bottom:1px solid #eee;}
@@ -7,21 +14,46 @@ h1, h2 {font-size:24px;}
 #comments h3, legend {display:none;}
 
 /* Rating widget with up/down arrows */
-.rating {float:left; margin-top:-15px;}
+.rating {
+    float:left;
+    background-color: #efefef;
+    padding: 10px;
+    margin: 0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
 .rating form {display:none !important;}
 .rating i {display:block !important;}
 .link-view .rating i {float:left; margin:8px 0 0 -4px;}
-.arrows {float:left; margin-top:-5px;}
-.link-item .score {font-size:30px;}
+.arrows {
+    float:left;
+    margin: 0 10px 0 0;
+    background-color: #fff;
+    padding: 7px;
+    display: block;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.link-item .score {
+  font-size: 30px;
+  line-height: 40px
+}
 .score, .arrows {opacity:.6;}
 #comments .rating, .link-meta .rating {margin:0 5px 0 0 !important;}
 
 /* Link listing, details */
-.link-item {margin:10px 0 25px 0; padding:10px 0; border-bottom:1px solid #eee;}
+.link-item {
+    margin: 0;
+    padding: 15px 0 15px 0;
+    border-bottom:1px solid #eee;
+    background-color: #fff;
+}
 .link-meta, .link-detail, #comments {font-size:12px; color:#666;}
 .link-meta {margin:10px 0;}
 .link-item h2 {line-height:15px;}
-.link-detail {margin:-25px 0 0 10px;}
+.link-detail {margin: 0 0 0 20px;}
 .link-item .rating, .link-detail {float:left;}
 
 /* Comments */
