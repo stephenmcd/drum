@@ -26,6 +26,8 @@ h1, h2 {font-size:24px;}
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    width:70px;
+    text-align:center;
 }
 .link-view .rating i {float:left; margin:8px 0 0 -4px;}
 .link-item .arrows {
@@ -56,6 +58,7 @@ h1, h2 {font-size:24px;}
 .link-item h2 {line-height:15px;}
 .link-detail {margin: 0 0 0 20px;}
 .link-item .rating, .link-detail {float:left;}
+/*.link-negative {opacity:.5;}*/
 
 /* Comments */
 #comment .control-group, .reply-form .control-group {display:none;}
