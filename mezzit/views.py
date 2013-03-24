@@ -13,6 +13,12 @@ from .utils import order_by_score
 
 
 class UserView(ListView):
+    """
+    List view that puts a ``profile_user`` variable into the context,
+    which is optionally retrieved by a ``username`` urlpattern var.
+    If a user is loaded, ``object_list`` is filtered by the loaded
+    user. Used for showing lists of links and comments.
+    """
 
     def get_context_data(self, **kwargs):
         context = super(UserView, self).get_context_data(**kwargs)
@@ -31,8 +37,18 @@ class UserView(ListView):
 
 
 class ScoredView(UserView):
+    """
+    List view that optionally orders ``object_list`` by calculated
+    score. Subclasses must defined a ``date_field`` attribute for the
+    related model, that's used to determine time-scaled scoring.
+    Ordering by score is the default behaviour, but can be
+    overridden by passing ``False`` to the ``by_score`` arg in
+    urlpatterns, in which case ``object_list`` is sorted by most
+    recent, using the ``date_field`` attribute. Used for showing lists
+    of links and comments.
+    """
 
-     def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(ScoredView, self).get_context_data(**kwargs)
         object_list = context["object_list"]
         context["by_score"] = self.kwargs.get("by_score", True)
@@ -51,10 +67,20 @@ class ScoredView(UserView):
 
 
 class LinkView(object):
+    """
+    List and detail view mixin for links - just defines the correct
+    queryset.
+    """
     queryset = Link.objects.published().select_related("user", "user__profile")
 
 
 class LinkList(LinkView, ScoredView):
+    """
+    List view for links, which can be for all users (homepage) or
+    a single user (links from user's profile page). Links can be
+    order by score (homepage, profile links) or by most recently
+    created ("newest" main nav item).
+    """
 
     date_field = "publish_date"
 
@@ -67,6 +93,11 @@ class LinkList(LinkView, ScoredView):
             return "Newest"
 
 class LinkCreate(CreateView):
+    """
+    Link creation view - assigns the user to the new link, as well
+    as setting Mezzanine's ``gen_description`` attribute to ``False``,
+    so that we can provide our own descriptions.
+    """
 
     form_class = LinkForm
     model = Link
@@ -78,10 +109,21 @@ class LinkCreate(CreateView):
 
 
 class LinkDetail(LinkView, DetailView):
+    """
+    Link detail view - threaded comments and rating are implemented
+    in its template.
+    """
     pass
 
 
 class CommentList(ScoredView):
+    """
+    List view for comments, which can be for all users ("comments" and
+    "best" main nav items) or a single user (comments from user's
+    profile page). Comments can be order by score ("best" main nav item)
+    or by most recently created ("comments" main nav item, profile
+    comments).
+    """
 
     queryset = ThreadedComment.objects.visible() \
         .select_related("user", "user__profile") \
