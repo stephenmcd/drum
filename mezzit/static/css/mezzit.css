@@ -14,8 +14,12 @@ h1, h2 {font-size:24px;}
 #comments h3, legend {display:none;}
 
 /* Rating widget with up/down arrows */
-.rating {
-    float:left;
+.rating {float:left; margin-top:-15px;}
+.rating form {display:none !important;}
+.rating i {display:block !important;}
+.arrows {float:left; margin-top:-5px;}
+
+.link-item .rating {
     background-color: #efefef;
     padding: 10px;
     margin: 0;
@@ -23,11 +27,8 @@ h1, h2 {font-size:24px;}
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
-.rating form {display:none !important;}
-.rating i {display:block !important;}
 .link-view .rating i {float:left; margin:8px 0 0 -4px;}
-.arrows {
-    float:left;
+.link-item .arrows {
     margin: 0 10px 0 0;
     background-color: #fff;
     padding: 7px;
