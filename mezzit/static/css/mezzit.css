@@ -7,7 +7,7 @@ footer {
 }
 
 /* Main page title */
-h1 {margin:0 0 20px 0; border-bottom:1px solid #eee;}
+h1 {margin:0; border-bottom:1px solid #eee;}
 h1, h2 {font-size:24px;}
 
 /* Redundant Mezzanine titles */
@@ -47,13 +47,12 @@ h1, h2 {font-size:24px;}
 #comments .rating, .link-meta .rating {margin:0 5px 0 0 !important;}
 
 /* Link listing, details */
-.link-item {
+.link-item, .comment-item {
     margin: 0;
     padding: 15px 0 15px 0;
     border-bottom:1px solid #eee;
-    background-color: #fff;
 }
-.link-meta, .link-detail, #comments {font-size:12px; color:#666;}
+.link-meta, .link-detail, .comment-item, #comments {font-size:12px; color:#666;}
 .link-meta {margin:10px 0;}
 .link-item h2 {line-height:15px;}
 .link-detail {margin: 0 0 0 20px;}
