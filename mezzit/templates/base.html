@@ -44,8 +44,10 @@
         <li class="divider-vertical"></li>
         {% url "link_list_latest" as link_list_latest %}
         {% url "comment_list_latest" as comment_list_latest %}
+        {% url "comment_list_best" as comment_list_best %}
         <li{% if request.path == link_list_latest %} class="active"{% endif %}><a href="{{ link_list_latest }}">Newest</a></li>
         <li{% if request.path == comment_list_latest %} class="active"{% endif %}><a href="{{ comment_list_latest }}">Comments</a></li>
+        <li{% if request.path == comment_list_best %} class="active"{% endif %}><a href="{{ comment_list_best }}">Best</a></li>
     </ul>
     <div class="nav-collapse">
         <div class="pull-right">
