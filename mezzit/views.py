@@ -85,8 +85,8 @@ class LinkList(LinkView, ScoreOrderingView):
     date_field = "publish_date"
 
     def get_title(self, context):
-        if self.kwargs.get("by_score", True):
-            return ""
+        if context["by_score"]:
+            return ""  # Homepage
         if context["profile_user"]:
             return "Links by %s" % context["profile_user"].profile
         else:
@@ -134,6 +134,8 @@ class CommentList(ScoreOrderingView):
     def get_title(self, context):
         if context["profile_user"]:
             return "Comments by %s" % context["profile_user"].profile
+        elif context["by_score"]:
+            return "Best comments"
         else:
             return "Latest comments"
 
