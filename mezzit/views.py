@@ -12,7 +12,7 @@ from .forms import LinkForm
 from .utils import order_by_score
 
 
-class UserView(ListView):
+class UserFilterView(ListView):
     """
     List view that puts a ``profile_user`` variable into the context,
     which is optionally retrieved by a ``username`` urlpattern var.
@@ -21,7 +21,7 @@ class UserView(ListView):
     """
 
     def get_context_data(self, **kwargs):
-        context = super(UserView, self).get_context_data(**kwargs)
+        context = super(UserFilterView, self).get_context_data(**kwargs)
         try:
             username = self.kwargs["username"]
         except KeyError:
@@ -36,7 +36,7 @@ class UserView(ListView):
         return context
 
 
-class ScoredView(UserView):
+class ScoreOrderingView(UserFilterView):
     """
     List view that optionally orders ``object_list`` by calculated
     score. Subclasses must defined a ``date_field`` attribute for the
@@ -49,7 +49,7 @@ class ScoredView(UserView):
     """
 
     def get_context_data(self, **kwargs):
-        context = super(ScoredView, self).get_context_data(**kwargs)
+        context = super(ScoreOrderingView, self).get_context_data(**kwargs)
         object_list = context["object_list"]
         context["by_score"] = self.kwargs.get("by_score", True)
         if context["by_score"]:
@@ -74,7 +74,7 @@ class LinkView(object):
     queryset = Link.objects.published().select_related("user", "user__profile")
 
 
-class LinkList(LinkView, ScoredView):
+class LinkList(LinkView, ScoreOrderingView):
     """
     List view for links, which can be for all users (homepage) or
     a single user (links from user's profile page). Links can be
@@ -91,6 +91,7 @@ class LinkList(LinkView, ScoredView):
             return "Links by %s" % context["profile_user"].profile
         else:
             return "Newest"
+
 
 class LinkCreate(CreateView):
     """
@@ -116,7 +117,7 @@ class LinkDetail(LinkView, DetailView):
     pass
 
 
-class CommentList(ScoredView):
+class CommentList(ScoreOrderingView):
     """
     List view for comments, which can be for all users ("comments" and
     "best" main nav items) or a single user (comments from user's
