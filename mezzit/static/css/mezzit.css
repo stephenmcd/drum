@@ -11,7 +11,8 @@ h1 {margin:0; border-bottom:1px solid #eee;}
 h1, h2 {font-size:24px;}
 
 /* Redundant Mezzanine titles */
-#comments h3, legend {display:none;}
+legend {display:none;}
+fieldset {margin-top:20px;}
 
 /* Rating widget with up/down arrows */
 .rating {float:left; margin-top:-15px;}
@@ -44,7 +45,9 @@ h1, h2 {font-size:24px;}
   line-height: 40px
 }
 .score, .arrows {opacity:.6;}
-#comments .rating, .link-meta .rating {margin:0 5px 0 0 !important;}
+.link-meta .rating {margin:0 5px 0 0 !important;}
+#comments .rating {margin:1px 5px 0 3px !important;}
+#comments .rating i {opacity:0.7;}
 
 /* Link listing, details */
 .link-item, .comment-item {
@@ -60,9 +63,14 @@ h1, h2 {font-size:24px;}
 /*.link-negative {opacity:.5;}*/
 
 /* Comments */
+#comments h3 {font-weight:normal; font-size:20px; border-top:1px solid #eee;
+              padding-top:5px; margin:20px 0 -5px 0;}
 #comment .control-group, .reply-form .control-group {display:none;}
 #comment .input_id_comment, .reply-form .input_id_comment {display:block;}
 #comment label {margin-top:20px;}
-#comments li {padding:2px 0 2px 10px; border-width:1px 0 0 0; background:none; margin:0;}
-.comment-thread {margin:0; padding:0 0 0 10px !important;}
+#comments li {padding:10px 0; border:0; background:none; margin:0;}
+.comment-thread ul {margin:0; padding:0 0 0 25px !important;}
+.comment-meta, .comment-links {color:#999; margin:0; font-size:11px;}
+.comment-links {padding-bottom:5px; border-bottom:1px solid #eee;}
+.comment-comment {margin-bottom:5px;}
 

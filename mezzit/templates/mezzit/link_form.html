@@ -7,9 +7,10 @@
 
 {% block main %}
 <form method="post">
-{% fields_for form %}
+<fieldset>{% fields_for form %}</fieldset>
 <div class="actions">
     <input class="btn btn-primary btn-large" type="submit">
 </div>
+
 </form>
 {% endblock %}

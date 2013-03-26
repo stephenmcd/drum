@@ -2,15 +2,20 @@
 
 <ul class="unstyled comment-thread">
     {% for comment in comments_for_thread %}
-    <li id="comment-{{ comment.id }}"{% if comment.by_author %} class="comment-author"{% endif %}>
+    <li id="comment-{{ comment.id }}">
     {% if not comment.is_removed and comment.is_public %}
 
-        <p>{{ comment.comment|comment_filter }}</p>
-        {% rating_for comment %}
-        by <a href="{% url "profile" comment.user.username %}">{{ comment.user.profile }}</a>
-        {{ comment.submit_date|timesince }} ago |
-        <a href="{{ request.path }}#comment-{{ comment.id }}">link</a> |
-        <a href="#reply-{{ comment.id }}" class="reply">reply</a>
+        <p class="comment-meta">
+            <a href="{% url "profile" comment.user.username %}">{{ comment.user.profile }}</a>
+            {{ comment.submit_date|timesince }} ago
+        </p>
+        <p class="comment-comment">{{ comment.comment|comment_filter }}</p>
+
+        <div class="comment-links">
+            {% rating_for comment %}
+            <a href="{{ request.path }}#comment-{{ comment.id }}">link</a> |
+            <a href="#reply-{{ comment.id }}" class="reply">reply</a>
+        </div>
 
         <form class="reply-form" method="post" id="reply-{{ comment.id }}"
             action="{{ comment_url }}#reply-{{ comment.id }}"
