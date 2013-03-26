@@ -1,5 +1,6 @@
 
 from time import time
+from urlparse import urlparse
 
 from django.db import models
 from django.db.models.signals import post_save
@@ -19,6 +20,9 @@ class Link(Displayable, Ownable):
     @models.permalink
     def get_absolute_url(self):
         return ("link_detail", (), {"slug": self.slug})
+
+    def domain(self):
+        return urlparse(self.link).netloc
 
 
 class Profile(models.Model):

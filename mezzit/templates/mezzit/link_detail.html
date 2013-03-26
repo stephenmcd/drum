@@ -3,7 +3,10 @@
 {% load mezzanine_tags rating_tags comment_tags mezzit_tags future %}
 
 {% block meta_title %}{{ object.title }}{% endblock %}
-{% block title %}<a href="{{ object.object }}">{{ object.title }}</a>{% endblock %}
+{% block title %}
+<a href="{{ object.link }}">{{ object.title }}</a>
+<span class="domain">({{ object.domain }})</span>
+{% endblock %}
 
 {% block main %}
 <div class="link-view">

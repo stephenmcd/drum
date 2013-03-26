@@ -20,6 +20,7 @@ fieldset {margin-top:20px;}
 .rating i {display:block !important;}
 .arrows {float:left; margin-top:-5px;}
 
+.domain {font-weight:normal; font-size:14px; color:#999;}
 .link-item .rating {
     background-color: #efefef;
     padding: 10px;
