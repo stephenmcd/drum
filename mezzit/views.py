@@ -71,7 +71,8 @@ class LinkView(object):
     List and detail view mixin for links - just defines the correct
     queryset.
     """
-    queryset = Link.objects.published().select_related("user", "user__profile")
+    def get_queryset(self):
+        return Link.objects.published().select_related("user", "user__profile")
 
 
 class LinkList(LinkView, ScoreOrderingView):
@@ -126,10 +127,11 @@ class CommentList(ScoreOrderingView):
     comments).
     """
 
-    queryset = ThreadedComment.objects.visible() \
-        .select_related("user", "user__profile") \
-        .prefetch_related("content_object")
     date_field = "submit_date"
+
+    def get_queryset(self):
+        return ThreadedComment.objects.visible().select_related("user",
+            "user__profile").prefetch_related("content_object")
 
     def get_title(self, context):
         if context["profile_user"]:
