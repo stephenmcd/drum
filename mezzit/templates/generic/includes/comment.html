@@ -39,5 +39,8 @@
     {% comment_thread comment %}
     </li>
     {% endfor %}
+    {% if no_comments %}
+    <li>No comments yet</li>
+    {% endif %}
 </ul>
 
