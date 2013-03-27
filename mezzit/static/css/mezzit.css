@@ -58,8 +58,10 @@ fieldset {margin-top:20px;}
 }
 .link-meta, .link-detail, .comment-item, #comments {font-size:12px; color:#666;}
 .link-meta {margin:10px 0;}
-.link-item h2 {line-height:15px;}
+.link-item h2 {line-height:30px; margin-top:0;}
 .link-item .rating, .link-detail {float:left;}
+.link-detail {width:80%;}
+@media (max-width: 600px) {.link-detail {width:60%;}}
 /*.link-negative {opacity:.5;}*/
 
 /* Comments */
