@@ -1,6 +1,10 @@
 
+from datetime import timedelta
+
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
+from django.contrib.messages import info, error
+from django.shortcuts import get_object_or_404, redirect
+from django.utils.timezone import now
 from django.views.generic import ListView, CreateView, DetailView
 
 from mezzanine.conf import settings
@@ -102,8 +106,22 @@ class LinkCreate(CreateView):
     model = Link
 
     def form_valid(self, form):
+        hours = getattr(settings, "ALLOWED_DUPLICATE_LINK_HOURS", None)
+        if hours:
+            lookup = {
+                "link": form.instance.link,
+                "publish_date__gt": now() - timedelta(hours=hours),
+            }
+            try:
+                link = Link.objects.get(**lookup)
+            except Link.DoesNotExist:
+                pass
+            else:
+                error(self.request, "Link exists")
+                return redirect(link)
         form.instance.user = self.request.user
         form.instance.gen_description = False
+        info(self.request, "Link created")
         return super(LinkCreate, self).form_valid(form)
 
 
