@@ -9,7 +9,7 @@
 
 {% for link in object_list %}
 <div class="link-item clearfix">
-    {% rating_for link %}
+    {% if not title %}{% rating_for link %}{% endif %}
     <div class="link-detail{% if link.rating_sum < 0 %} link-negative{% endif %}">
         <h2>
             <a href="{{ link.link }}">{{ link.title }}</a>

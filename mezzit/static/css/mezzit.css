@@ -24,7 +24,7 @@ fieldset {margin-top:20px;}
 .link-item .rating {
     background-color: #efefef;
     padding: 10px;
-    margin: 0;
+    margin: 0 20px 0 0;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -59,7 +59,6 @@ fieldset {margin-top:20px;}
 .link-meta, .link-detail, .comment-item, #comments {font-size:12px; color:#666;}
 .link-meta {margin:10px 0;}
 .link-item h2 {line-height:15px;}
-.link-detail {margin: 0 0 0 20px;}
 .link-item .rating, .link-detail {float:left;}
 /*.link-negative {opacity:.5;}*/
 
