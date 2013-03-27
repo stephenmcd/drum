@@ -11,7 +11,11 @@
         <a href="#"><i class="icon icon-arrow-down"></i></a>
     </span>
 
-    <span class="score">{{ rating_sum }}</span>
+    <span class="score">
+        {% with rating_obj.comments_count|default:0 as comments_count %}
+        {{ rating_sum|add:comments_count }}
+        {% endwith %}
+    </span>
 
 </div>
 
