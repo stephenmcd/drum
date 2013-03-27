@@ -30,8 +30,8 @@ class UserFilterView(ListView):
             users = User.objects.select_related("profile")
             lookup = {"username__iexact": username, "is_active": True}
             profile_user = get_object_or_404(users, **lookup)
-            object_list = context["object_list"].filter(user=profile_user)
-            context["object_list"] = object_list
+            qs = context["object_list"].filter(user=profile_user)
+            context["object_list"] = qs
         context["profile_user"] = profile_user
         return context
 
@@ -50,18 +50,14 @@ class ScoreOrderingView(UserFilterView):
 
     def get_context_data(self, **kwargs):
         context = super(ScoreOrderingView, self).get_context_data(**kwargs)
-        object_list = context["object_list"]
+        qs = context["object_list"]
         context["by_score"] = self.kwargs.get("by_score", True)
         if context["by_score"]:
-            object_list = order_by_score(object_list, self.date_field)
+            qs = order_by_score(qs, self.score_fields, self.date_field)
         else:
-            object_list = object_list.order_by("-" + self.date_field)
-        context["object_list"] = paginate(
-            object_list,
-            self.request.GET.get("page", 1),
-            settings.ITEMS_PER_PAGE,
-            settings.MAX_PAGING_LINKS,
-        )
+            qs = qs.order_by("-" + self.date_field)
+        context["object_list"] = paginate(qs, self.request.GET.get("page", 1),
+            settings.ITEMS_PER_PAGE, settings.MAX_PAGING_LINKS)
         context["title"] = self.get_title(context)
         return context
 
@@ -84,6 +80,7 @@ class LinkList(LinkView, ScoreOrderingView):
     """
 
     date_field = "publish_date"
+    score_fields = ("rating_sum", "comments_count")
 
     def get_title(self, context):
         if context["by_score"]:
@@ -128,6 +125,7 @@ class CommentList(ScoreOrderingView):
     """
 
     date_field = "submit_date"
+    score_fields = ("rating_sum",)
 
     def get_queryset(self):
         return ThreadedComment.objects.visible().select_related("user",
