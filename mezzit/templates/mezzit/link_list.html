@@ -21,7 +21,7 @@
     </div>
 </div>
 {% empty %}
-<p>Whoa, there's like, literally no data here, like seriously, I totally got nothin.</p>
+<p>{{ no_data }}</p>
 {% endfor %}
 
 {% pagination_for object_list %}
