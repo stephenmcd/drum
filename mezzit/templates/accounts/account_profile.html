@@ -8,7 +8,7 @@
 {% block main %}
 {% if profile_user == request.user %}
 <div class="pull-right">
-    <a class="btn btn-large btn-primary" href="{% url "profile_update" %}">Update profile</a>
+    <a class="btn btn-large btn-primary btn-profile" href="{% url "profile_update" %}">Update profile</a>
 </div>
 {% endif %}
 <div class="clearfix">
