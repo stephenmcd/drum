@@ -1,135 +1,15 @@
 
-######################
-# MEZZANINE SETTINGS #
-######################
+###################
+# DJANGO SETTINGS #
+###################
 
-# The following settings are already defined with default values in
-# the ``defaults.py`` module within each of Mezzanine's apps, but are
-# common enough to be put here, commented out, for convenient
-# overriding. Please consult the settings documentation for a full list
-# of settings Mezzanine implements:
-# http://mezzanine.jupo.org/docs/configuration.html#default-settings
-
-# Controls the ordering and grouping of the admin menu.
-#
-# ADMIN_MENU_ORDER = (
-#     ("Content", ("pages.Page", "blog.BlogPost",
-#        "generic.ThreadedComment", ("Media Library", "fb_browse"),)),
-#     ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
-#     ("Users", ("auth.User", "auth.Group",)),
-# )
-
-# A three item sequence, each containing a sequence of template tags
-# used to render the admin dashboard.
-#
-# DASHBOARD_TAGS = (
-#     ("blog_tags.quick_blog", "mezzanine_tags.app_list"),
-#     ("comment_tags.recent_comments",),
-#     ("mezzanine_tags.recent_actions",),
-# )
-
-# A sequence of templates used by the ``page_menu`` template tag. Each
-# item in the sequence is a three item sequence, containing a unique ID
-# for the template, a label for the template, and the template path.
-# These templates are then available for selection when editing which
-# menus a page should appear in. Note that if a menu template is used
-# that doesn't appear in this setting, all pages will appear in it.
-
-# PAGE_MENU_TEMPLATES = (
-#     (1, "Top navigation bar", "pages/menus/dropdown.html"),
-#     (2, "Left-hand tree", "pages/menus/tree.html"),
-#     (3, "Footer", "pages/menus/footer.html"),
-# )
-
-# A sequence of fields that will be injected into Mezzanine's (or any
-# library's) models. Each item in the sequence is a four item sequence.
-# The first two items are the dotted path to the model and its field
-# name to be added, and the dotted path to the field class to use for
-# the field. The third and fourth items are a sequence of positional
-# args and a dictionary of keyword args, to use when creating the
-# field instance. When specifying the field class, the path
-# ``django.models.db.`` can be omitted for regular Django model fields.
-#
-# EXTRA_MODEL_FIELDS = (
-#     (
-#         # Dotted path to field.
-#         "mezzanine.blog.models.BlogPost.image",
-#         # Dotted path to field class.
-#         "somelib.fields.ImageField",
-#         # Positional args for field class.
-#         ("Image",),
-#         # Keyword args for field class.
-#         {"blank": True, "upload_to": "blog"},
-#     ),
-#     # Example of adding a field to *all* of Mezzanine's content types:
-#     (
-#         "mezzanine.pages.models.Page.another_field",
-#         "IntegerField", # 'django.db.models.' is implied if path is omitted.
-#         ("Another name",),
-#         {"blank": True, "default": 1},
-#     ),
-# )
-
-# Setting to turn on featured images for blog posts. Defaults to False.
-#
-# BLOG_USE_FEATURED_IMAGE = True
-
-SITE_TITLE = "Mezzit"
-SITE_TAGLINE = "Share some links"
-
-# If True, the south application will be automatically added to the
-# INSTALLED_APPS setting.
-USE_SOUTH = True
-
-
-########################
-# MAIN DJANGO SETTINGS #
-########################
-
-# People who get code error notifications.
-# In the format (('Full Name', 'email@example.com'),
-#                ('Full Name', 'anotheremail@example.com'))
-ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
-)
-MANAGERS = ADMINS
-
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
 TIME_ZONE = None
-
-# If you set this to True, Django will use timezone-aware datetimes.
 USE_TZ = True
-
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = "en"
-
-# A boolean that turns on/off debug mode. When set to ``True``, stack traces
-# are displayed for error pages. Should always be set to ``False`` in
-# production. Best set to ``True`` in local_settings.py
 DEBUG = False
-
-# Whether a user's session cookie expires when the Web browser is closed.
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
 SITE_ID = 1
-
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
 USE_I18N = False
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = "9d2461e7-7879-4502-8c97-69d3f732f227493fd423-d6a3-4f23-a6b2-eda76f4b233573a4eb99-a3e3-4638-a345-0c1dd2d4f1b9"
-
-# Tuple of IP addresses, as strings, that:
-#   * See debug comments, when DEBUG is true
-#   * Receive x-headers
 INTERNAL_IPS = ("127.0.0.1",)
 
 # List of callables that know how to import templates from various sources.
@@ -147,29 +27,6 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-
-#############
-# DATABASES #
-#############
-
-DATABASES = {
-    "default": {
-        # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-        "ENGINE": "django.db.backends.",
-        # DB name or path to database file if using sqlite3.
-        "NAME": "",
-        # Not used with sqlite3.
-        "USER": "",
-        # Not used with sqlite3.
-        "PASSWORD": "",
-        # Set to empty string for localhost. Not used with sqlite3.
-        "HOST": "",
-        # Set to empty string for default. Not used with sqlite3.
-        "PORT": "",
-    }
-}
-
 
 #########
 # PATHS #
@@ -207,11 +64,6 @@ MEDIA_URL = STATIC_URL + "media/"
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
-
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_DIRNAME
 
@@ -227,7 +79,7 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 ################
 
 INSTALLED_APPS = (
-    "mezzit",
+    "drum",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -297,40 +149,20 @@ OPTIONAL_APPS = (
 
 DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
 
-###################
-# MEZZIT SETTINGS #
-###################
 
+#################
+# DRUM SETTINGS #
+#################
+
+SITE_TITLE = "Drum"
+USE_SOUTH = True
 RATINGS_RANGE = (-1, 1)
 RATINGS_ACCOUNT_REQUIRED = True
 COMMENTS_ACCOUNT_REQUIRED = True
-AUTH_PROFILE_MODULE = "mezzit.Profile"
+AUTH_PROFILE_MODULE = "drum.Profile"
 ACCOUNTS_PROFILE_VIEWS_ENABLED = True
 ALLOWED_DUPLICATE_LINK_HOURS = 24 * 7 * 3
 ITEMS_PER_PAGE = 20
-
-###################
-# DEPLOY SETTINGS #
-###################
-
-# These settings are used by the default fabfile.py provided.
-# Check fabfile.py for defaults.
-
-# FABRIC = {
-#     "SSH_USER": "", # SSH username
-#     "SSH_PASS":  "", # SSH password (consider key-based authentication)
-#     "SSH_KEY_PATH":  "", # Local path to SSH key file, for key-based auth
-#     "HOSTS": [], # List of hosts to deploy to
-#     "VIRTUALENV_HOME":  "", # Absolute remote path for virtualenvs
-#     "PROJECT_NAME": "", # Unique identifier for project
-#     "REQUIREMENTS_PATH": "", # Path to pip requirements, relative to project
-#     "GUNICORN_PORT": 8000, # Port gunicorn will listen on
-#     "LOCALE": "en_US.UTF-8", # Should end with ".UTF-8"
-#     "LIVE_HOSTNAME": "www.example.com", # Host for public site.
-#     "REPO_URL": "", # Git or Mercurial remote repo URL for the project
-#     "DB_PASS": "", # Live database password
-#     "ADMIN_PASS": "", # Live admin user password
-# }
 
 
 ##################

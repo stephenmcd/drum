@@ -1,5 +1,5 @@
 
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
@@ -7,16 +7,10 @@ from mezzanine.core.views import direct_to_template
 
 admin.autodiscover()
 
-# Add the urlpatterns for any custom Django applications here.
-# You can also change the ``home`` view to add your own functionality to
-# the project's homepage.
+
 urlpatterns = patterns("",
-    ("^", include("mezzit.urls")),
     ("^admin/", include(admin.site.urls)),
-    # ADD YOUR OWN URLPATTERNS *ABOVE* THE LINE BELOW.
-    # ``mezzanine.urls`` INCLUDES A *CATCH ALL* PATTERN
-    # FOR PAGES, SO URLPATTERNS ADDED BELOW ``mezzanine.urls``
-    # WILL NEVER BE MATCHED!
+    ("^", include("drum.urls")),
     ("^", include("mezzanine.urls")),
 )
 

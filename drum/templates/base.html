@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
-{% load mezzanine_tags i18n future %}
+{% load mezzanine_tags i18n future staticfiles %}
 <head>
 
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -10,18 +10,19 @@
 <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
 <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
 
+<link href='http://fonts.googleapis.com/css?family=Risque' rel='stylesheet' type='text/css'>
 {% compress css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/mezzanine.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css">
-<link rel="stylesheet" href="{{ STATIC_URL }}css/mezzit.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/drum.css">
 {% endcompress %}
 
 {% compress js %}
 <script src="{{ STATIC_URL }}mezzanine/js/{{ settings.JQUERY_FILENAME }}"></script>
 <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
 <script src="{{ STATIC_URL }}js/bootstrap-extras.js"></script>
-<script src="{{ STATIC_URL }}js/mezzit.js"></script>
+<script src="{{ STATIC_URL }}js/drum.js"></script>
 <script>
 </script>
 {% endcompress %}
@@ -39,6 +40,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </a>
+
     {% if settings.SITE_TITLE %}<a class="brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
     <ul class="nav">
         <li class="divider-vertical"></li>

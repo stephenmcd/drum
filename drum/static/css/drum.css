@@ -6,6 +6,13 @@ footer {
   background: none;
 }
 
+.brand {
+    background:url('../img/drum-logo.png') no-repeat; background-position:0 5px;
+    text-indent:20px; margin-left:-5px !important;
+    font-family: 'Risque', cursive;
+    font-size:28px !important;
+}
+
 /* Main page title */
 h1 {margin:0; border-bottom:1px solid #eee;}
 h1, h2 {font-size:24px;}
