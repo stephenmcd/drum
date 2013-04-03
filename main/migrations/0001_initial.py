@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Link'
-        db.create_table(u'drum_link', (
+        db.create_table(u'main_link', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('comments_count', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('keywords_string', self.gf('django.db.models.fields.CharField')(max_length=500, blank=True)),
@@ -33,24 +33,24 @@ class Migration(SchemaMigration):
             ('rating', self.gf('mezzanine.generic.fields.RatingField')(object_id_field='object_pk', to=orm['generic.Rating'], frozen_by_south=True)),
             ('comments', self.gf('mezzanine.generic.fields.CommentsField')(object_id_field='object_pk', to=orm['generic.ThreadedComment'], frozen_by_south=True)),
         ))
-        db.send_create_signal(u'drum', ['Link'])
+        db.send_create_signal(u'main', ['Link'])
 
         # Adding model 'Profile'
-        db.create_table(u'drum_profile', (
+        db.create_table(u'main_profile', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
             ('bio', self.gf('django.db.models.fields.TextField')()),
             ('karma', self.gf('django.db.models.fields.IntegerField')(default=0)),
         ))
-        db.send_create_signal(u'drum', ['Profile'])
+        db.send_create_signal(u'main', ['Profile'])
 
 
     def backwards(self, orm):
         # Deleting model 'Link'
-        db.delete_table(u'drum_link')
+        db.delete_table(u'main_link')
 
         # Deleting model 'Profile'
-        db.delete_table(u'drum_profile')
+        db.delete_table(u'main_profile')
 
 
     models = {
@@ -106,38 +106,6 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'drum.link': {
-            'Meta': {'object_name': 'Link'},
-            '_meta_title': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
-            'comments': ('mezzanine.generic.fields.CommentsField', [], {'object_id_field': "'object_pk'", 'to': u"orm['generic.ThreadedComment']", 'frozen_by_south': 'True'}),
-            'comments_count': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'expiry_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'gen_description': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'in_sitemap': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'keywords': ('mezzanine.generic.fields.KeywordsField', [], {'object_id_field': "'object_pk'", 'to': u"orm['generic.AssignedKeyword']", 'frozen_by_south': 'True'}),
-            'keywords_string': ('django.db.models.fields.CharField', [], {'max_length': '500', 'blank': 'True'}),
-            'link': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
-            'publish_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'rating': ('mezzanine.generic.fields.RatingField', [], {'object_id_field': "'object_pk'", 'to': u"orm['generic.Rating']", 'frozen_by_south': 'True'}),
-            'rating_average': ('django.db.models.fields.FloatField', [], {'default': '0'}),
-            'rating_count': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'rating_sum': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'short_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
-            'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
-            'status': ('django.db.models.fields.IntegerField', [], {'default': '2'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'links'", 'to': u"orm['auth.User']"})
-        },
-        u'drum.profile': {
-            'Meta': {'object_name': 'Profile'},
-            'bio': ('django.db.models.fields.TextField', [], {}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'karma': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
-        },
         u'generic.assignedkeyword': {
             'Meta': {'ordering': "('_order',)", 'object_name': 'AssignedKeyword'},
             '_order': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
@@ -172,6 +140,38 @@ class Migration(SchemaMigration):
             'rating_sum': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'replied_to': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'comments'", 'null': 'True', 'to': u"orm['generic.ThreadedComment']"})
         },
+        u'main.link': {
+            'Meta': {'object_name': 'Link'},
+            '_meta_title': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
+            'comments': ('mezzanine.generic.fields.CommentsField', [], {'object_id_field': "'object_pk'", 'to': u"orm['generic.ThreadedComment']", 'frozen_by_south': 'True'}),
+            'comments_count': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'expiry_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'gen_description': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'in_sitemap': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'keywords': ('mezzanine.generic.fields.KeywordsField', [], {'object_id_field': "'object_pk'", 'to': u"orm['generic.AssignedKeyword']", 'frozen_by_south': 'True'}),
+            'keywords_string': ('django.db.models.fields.CharField', [], {'max_length': '500', 'blank': 'True'}),
+            'link': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
+            'publish_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'rating': ('mezzanine.generic.fields.RatingField', [], {'object_id_field': "'object_pk'", 'to': u"orm['generic.Rating']", 'frozen_by_south': 'True'}),
+            'rating_average': ('django.db.models.fields.FloatField', [], {'default': '0'}),
+            'rating_count': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'rating_sum': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'short_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
+            'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
+            'status': ('django.db.models.fields.IntegerField', [], {'default': '2'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'links'", 'to': u"orm['auth.User']"})
+        },
+        u'main.profile': {
+            'Meta': {'object_name': 'Profile'},
+            'bio': ('django.db.models.fields.TextField', [], {}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'karma': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
+        },
         u'sites.site': {
             'Meta': {'ordering': "('domain',)", 'object_name': 'Site', 'db_table': "'django_site'"},
             'domain': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
@@ -180,4 +180,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['drum']
+    complete_apps = ['main']
