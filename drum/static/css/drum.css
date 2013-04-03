@@ -8,7 +8,7 @@ footer {
 
 .brand {
     background:url('../img/drum-logo.png') no-repeat; background-position:0 5px;
-    text-indent:20px; margin-left:-5px !important;
+    text-indent:20px; margin-left:-3px !important;
     font-family: 'Risque', cursive;
     font-size:28px !important;
 }
