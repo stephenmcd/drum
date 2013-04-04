@@ -3,6 +3,7 @@ from datetime import timedelta
 
 from django.contrib.auth.models import User
 from django.contrib.messages import info, error
+from django.forms.models import modelform_factory
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.timezone import now
 from django.views.generic import ListView, CreateView, DetailView
@@ -12,7 +13,6 @@ from mezzanine.generic.models import ThreadedComment
 from mezzanine.utils.views import paginate
 
 from .models import Link
-from .forms import LinkForm
 from .utils import order_by_score
 
 
@@ -104,7 +104,8 @@ class LinkCreate(CreateView):
     so that we can provide our own descriptions.
     """
 
-    form_class = LinkForm
+    form_class = modelform_factory(Link, fields=("title", "link",
+                                                 "description"))
     model = Link
 
     def form_valid(self, form):
