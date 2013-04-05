@@ -42,7 +42,7 @@
 
     {% if settings.SITE_TITLE %}<a class="brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
     <ul class="nav">
-        <li class="divider-vertical"></li>
+        <li class="divider-vertical logo-divider"></li>
         {% url "link_list_latest" as link_list_latest %}
         {% url "comment_list_latest" as comment_list_latest %}
         {% url "comment_list_best" as comment_list_best %}
@@ -86,14 +86,14 @@
 <footer>
 <div class="container">
     <p>
-        <a href="https://github.com/stephencd/drum">Open Source</a>
+        Made by <a href="http://twitter.com/stephen_mcd">Stephen McDonald</a>
+        <span class="separator">|</span>
+        <a href="https://github.com/stephenmcd/drum">Open Source</a>
         <span class="separator">|</span>
         {% trans "Powered by" %} <a href="http://mezzanine.jupo.org">Mezzanine</a>
     </p>
 </div>
 </footer>
-
-{% include "includes/footer_scripts.html" %}
 
 </body>
 </html>

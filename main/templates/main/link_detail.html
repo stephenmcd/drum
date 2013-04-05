@@ -10,7 +10,7 @@
 
 {% block main %}
 <div class="link-view">
-    <p>{{ object.description }}</p>
+    <p class="description">{{ object.description }}</p>
     <div class="link-meta">
         {% rating_for object %}
         by <a href="{% url "profile" object.user.username %}">{{ object.user.profile }}</a>
