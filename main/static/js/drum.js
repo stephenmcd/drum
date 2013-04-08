@@ -1,5 +1,5 @@
 $(function() {
-    // Mezzit hides the radio buttons for +1 -1 ratings, and uses
+    // Drum hides the radio buttons for +1 -1 ratings, and uses
     // up/down arrow anchors. Attach click handlers to the arrow
     // anchors that when clicked, check the relevant hidden radio
     // button, and submits the form via AJAX. If the user is not

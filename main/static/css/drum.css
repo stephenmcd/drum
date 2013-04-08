@@ -1,36 +1,59 @@
 
 @import url(http://fonts.googleapis.com/css?family=Risque);
 
-body {
-  background-color: #fff;
-}
-
-footer {
-  background: none;
-}
-
-.brand {
-    background:url('../img/drum-logo.png') no-repeat; background-position:0 5px;
-    text-indent:20px; margin-left:-3px !important;
+/* Navbar fixes */
+.navbar-inner {border-radius:0 !important;}
+.navbar a {padding:10px 15px 0 15px !important;}
+.navbar a.btn {padding:3px 10px !important; margin:7px 3px;}
+.navbar-search .btn {display:none;}
+a.brand {
+    background:url('../img/drum-logo.png') no-repeat; background-position:5px 6px;
+    text-indent:13px; margin-left:-3px !important;
     font-family: 'Risque', cursive;
     font-size:28px !important;
+    padding:3px 20px !important;
+    text-decoration:none;
+    color:#fff !important;
 }
 
-/* Main page title */
-h1 {margin:0; border-bottom:1px solid #eee;}
-h1, h2 {font-size:24px;}
+/* Misc */
+.btn-profile {margin-top:20px;}
+.bio {margin:20px 0;}
+.page-info {text-indent:10px;}
+.page-info a:hover {border-color:#d7dce0 !important;}
+.alert {margin-top:0;}
+.alert a {text-decoration:none;}
+body {color:#666;}
 
-/* Redundant Mezzanine titles */
+/* Headings */
+h1 {margin:0;}
+h1, h2 {font-size:24px;}
+.domain {font-weight:normal; font-size:14px; color:#999;}
+
+/* Redundant Mezzanine bits */
 legend {display:none;}
 fieldset {margin-top:20px;}
+footer {background: none;}
+
+/* Big horizontal grey line everywhere */
+h1, .link-item, .comment-item, .comment-links, #comments h3 {
+    border:0 solid rgba(0,0,0,.02);
+}
+h1, .link-item, .comment-item, .comment-links {border-bottom-width:5px;}
+#comments h3 {border-top-width:5px;}
 
 /* Rating widget with up/down arrows */
 .rating {float:left; margin-top:-15px;}
 .rating form {display:none !important;}
 .rating i {display:block !important;}
 .arrows {float:left; margin-top:-5px;}
+.score, .arrows {opacity:.6;}
 
-.domain {font-weight:normal; font-size:14px; color:#999;}
+/* Link items in a list */
+.link-item h2 {line-height:30px; margin:0;}
+.link-item .rating, .link-detail {float:left;}
+.link-detail {width:80%;}
+@media (max-width: 600px) {.link-detail {width:60%;}}
 .link-item .rating {
     background-color: #efefef;
     padding: 10px;
@@ -41,8 +64,6 @@ fieldset {margin-top:20px;}
     width:75px;
     text-align:center;
 }
-.link-view .rating i {float:left; margin:8px 0 0 -4px;}
-.link-view .description {margin:20px 0;}
 .link-item .arrows {
     margin: 0 10px 0 0;
     background-color: #fff;
@@ -56,39 +77,21 @@ fieldset {margin-top:20px;}
   font-size: 30px;
   line-height: 40px
 }
-.score, .arrows {opacity:.6;}
-.link-meta .rating {margin:0 5px 0 0 !important;}
-#comments .rating {margin:1px 5px 0 3px !important;}
-#comments .rating i {opacity:0.7;}
 
 /* Link listing, details */
-.link-item, .comment-item {
-    margin: 0;
-    padding: 15px 0 15px 0;
-    border-bottom:1px solid #eee;
-}
-.link-meta, .link-detail, .comment-item, #comments {font-size:12px; color:#666;}
-.link-meta {margin:10px 0;}
-.link-item h2 {line-height:30px; margin:0;}
-.link-item .rating, .link-detail {float:left;}
-.link-detail {width:80%;}
-@media (max-width: 600px) {.link-detail {width:60%;}}
-/*.link-negative {opacity:.5;}*/
+.link-item, .comment-item {margin: 0; padding: 15px 0;}
+.link-view .rating i {float:left; margin:8px 0 0 -4px;}
+.link-view .description {margin:20px 0;}
+.link-meta .rating {margin:0 5px 0 0 !important;}
 
 /* Comments */
-#comments h3 {font-weight:normal; font-size:20px; border-top:1px solid #eee;
-              padding-top:5px; margin:20px 0 -5px 0;}
+#comments h3 {font-size:20px; padding-top:5px; margin:20px 0 -5px 0;}
 #comment .control-group, .reply-form .control-group {display:none;}
 #comment .input_id_comment, .reply-form .input_id_comment {display:block;}
 #comment label {margin-top:20px;}
 #comments li {padding:10px 0; border:0; background:none; margin:0;}
 .comment-thread ul {margin:0; padding:0 0 0 25px !important;}
-.comment-meta, .comment-links {color:#999; margin:0; font-size:11px;}
-.comment-links {padding-bottom:5px; border-bottom:1px solid #eee;}
-.comment-comment {margin-bottom:5px;}
-
-.btn-profile {margin-top:20px;}
-.bio {margin:20px 0;}
-.navbar-search .btn {margin-left:-5px !important;}
-.logo-divider {margin:0 4px !important;}
-@media (max-width: 979px) {.brand {font-size:1px !important;}}
+.comment-meta, .comment-links {color:#999; margin:0; font-size:12px;}
+.comment-links {padding-bottom:5px;}
+#comments .rating {margin:1px 5px 0 3px !important;}
+#comments .rating i {opacity:0.7;}

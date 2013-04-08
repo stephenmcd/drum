@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ LANGUAGE_CODE }}">
 {% load mezzanine_tags i18n future staticfiles %}
 <head>
@@ -13,6 +13,7 @@
 {% compress css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/mezzanine.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/flat-ui.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/drum.css">
 {% endcompress %}
@@ -31,7 +32,7 @@
 </head>
 <body>
 
-<div class="navbar">
+<div class="navbar navbar-inverse">
 <div class="navbar-inner navbar-fixed-top">
 <div class="container">
     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -42,7 +43,7 @@
 
     {% if settings.SITE_TITLE %}<a class="brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
     <ul class="nav">
-        <li class="divider-vertical logo-divider"></li>
+        <li class="divider-vertical"></li>
         {% url "link_list_latest" as link_list_latest %}
         {% url "comment_list_latest" as comment_list_latest %}
         {% url "comment_list_best" as comment_list_best %}
@@ -52,7 +53,7 @@
     </ul>
     <div class="nav-collapse">
         <div class="pull-right">
-            <a class="btn btn-small btn-primary" href="{% url "link_create" %}">New Link</a>
+            <a class="btn btn-small btn-warning" href="{% url "link_create" %}">New Link</a>
         </div>
         <ul class="nav pull-right"><li class="divider-vertical"></li></ul>
         {% search_form %}
