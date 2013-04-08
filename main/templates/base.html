@@ -10,6 +10,10 @@
 <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
 <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
 
+<style>
+@import url("http://fonts.googleapis.com/css?family=Lato:400,700,900,400italic");
+@import url(http://fonts.googleapis.com/css?family=Risque);
+</style>
 {% compress css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/mezzanine.css">
