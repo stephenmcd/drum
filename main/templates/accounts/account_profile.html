@@ -12,7 +12,7 @@
 </div>
 {% endif %}
 <div class="clearfix">
-    <p class="bio">{{ profile_user.profile.bio }}</p>
+    <p class="bio">{{ profile_user.profile.bio|urlize|linebreaks }}</p>
     <a href="{% url "comment_list_user" profile_user.username %}">comments</a> |
     <a href="{% url "link_list_user" profile_user.username %}">links</a>
 </div>
