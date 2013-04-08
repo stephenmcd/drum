@@ -1,18 +1,19 @@
 
-Mezzit
-======
+Drum
+====
 
-Mezzit is a Reddit / Hacker News clone, built using Mezzanine.
-It's intended to demonstate some of the non-CMS capabilities
-of Mezzanine.
+Drum is a Reddit / Hacker News clone, built using Mezzanine.
+It is intended to demonstate some of the non-CMS capabilities
+of Mezzanine, such as threaded comments, ratings, and public
+user accounts.
 
 Installation
 ============
 
 Basic setup::
 
-  $ hg clone ssh://hg@bitbucket.org/stephenmcd/mezzit
-  $ cd mezzit
+  $ hg clone ssh://hg@bitbucket.org/stephenmcd/drum
+  $ cd drum
   $ pip install -r requirements.txt
   $ cp local_settings.py.template local_settings.py
   $ ./manage.py createdb --noinput
