@@ -88,7 +88,7 @@ h1, .link-item, .comment-item, .comment-links {border-bottom-width:5px;}
 #comment .input_id_comment, .reply-form .input_id_comment {display:block;}
 #comment label {margin-top:20px;}
 #comments li {padding:10px 0; border:0; background:none; margin:0;}
-.comment-thread ul {margin:0; padding:0 0 0 25px !important;}
+.comment-thread ul {margin:0; padding:0 0 0 40px !important;}
 .comment-meta, .comment-links {color:#999; margin:0; font-size:12px;}
 .comment-links {padding-bottom:5px;}
 #comments .rating {margin:1px 5px 0 3px !important;}

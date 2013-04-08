@@ -15,19 +15,19 @@
             {% rating_for comment %}
             <a href="{{ request.path }}#comment-{{ comment.id }}">link</a> |
             <a href="#reply-{{ comment.id }}" class="reply">reply</a>
+            <form class="reply-form" method="post" id="reply-{{ comment.id }}"
+                action="{{ comment_url }}#reply-{{ comment.id }}"
+                {% if replied_to != comment.id %}style="display:none;"{% endif %}>
+                {% if replied_to == comment.id %}
+                {% fields_for posted_comment_form %}
+                {% else %}
+                {% fields_for unposted_comment_form %}
+                {% endif %}
+                <input type="hidden" name="replied_to" value="{{ comment.id }}">
+                <input class="btn btn-primary btn-large" type="submit" value="{% trans "Reply" %}">
+            </form>
         </div>
 
-        <form class="reply-form" method="post" id="reply-{{ comment.id }}"
-            action="{{ comment_url }}#reply-{{ comment.id }}"
-            {% if replied_to != comment.id %}style="display:none;"{% endif %}>
-            {% if replied_to == comment.id %}
-            {% fields_for posted_comment_form %}
-            {% else %}
-            {% fields_for unposted_comment_form %}
-            {% endif %}
-            <input type="hidden" name="replied_to" value="{{ comment.id }}">
-            <input class="btn btn-primary btn-large" type="submit" value="{% trans "Reply" %}">
-        </form>
 
     {% else %}
 
