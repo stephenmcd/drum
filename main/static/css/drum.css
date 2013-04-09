@@ -26,6 +26,7 @@ body {color:#666;}
 /* Headings */
 h1 {margin:0;}
 h1, h2 {font-size:24px;}
+h2 a:visited {color:rgb(156,188,156);}
 .domain {font-weight:normal; font-size:14px; color:#999;}
 
 /* Redundant Mezzanine bits */
@@ -43,15 +44,19 @@ h1, .link-item, .comment-item, .comment-links {border-bottom-width:5px;}
 /* Rating widget with up/down arrows */
 .rating {float:left; margin-top:-15px;}
 .rating form {display:none !important;}
-.rating i {display:block !important;}
+.rating i {
+    display:block !important;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
 .arrows {float:left; margin-top:-5px;}
 .score, .arrows {opacity:.6;}
+.arrows a:hover i {background-color:#1abc9c; background-image:url("../img/glyphicons-halflings-white.png");}
 
 /* Link items in a list */
 .link-item h2 {line-height:30px; margin:0;}
 .link-item .rating, .link-detail {float:left;}
-.link-detail {width:80%;}
-@media (max-width: 600px) {.link-detail {width:60%;}}
 .link-item .rating {
     background-color: #efefef;
     padding: 10px;
@@ -75,6 +80,11 @@ h1, .link-item, .comment-item, .comment-links {border-bottom-width:5px;}
   font-size: 30px;
   line-height: 40px
 }
+
+.link-detail {width:80%;}
+@media (max-width: 600px) {.link-detail {width:60%;}}
+.link-detail a.profile, .link-detail a.comments {color:#999;}
+.link-detail a.profile:visited, .link-detail a.comments:visited {color:#bbb;}
 
 /* Link listing, details */
 .link-item, .comment-item {margin: 0; padding: 15px 0;}
