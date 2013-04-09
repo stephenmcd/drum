@@ -12,8 +12,18 @@
 </div>
 {% endif %}
 <div class="clearfix">
-    <p class="bio">{{ profile_user.profile.bio|urlize|linebreaks }}</p>
+
+    {% with profile_user.profile as profile %}
+    {% if profile.bio %}
+    <p class="bio">{{ profile.bio|urlize|linebreaks }}</p>
+    {% endif %}
+    {% if profile.website %}
+    <p class="bio">Website: {{ profile.website|urlize }}</p>
+    {% endif %}
+    {% endwith %}
+
     <a href="{% url "comment_list_user" profile_user.username %}">comments ({{ profile_user.comment_comments.count }})</a> |
     <a href="{% url "link_list_user" profile_user.username %}">links ({{ profile_user.links.published.count }})</a>
+
 </div>
 {% endblock %}
