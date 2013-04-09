@@ -27,8 +27,7 @@
 <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
 <script src="{{ STATIC_URL }}js/bootstrap-extras.js"></script>
 <script src="{{ STATIC_URL }}js/drum.js"></script>
-<script>
-</script>
+<script src="{{ STATIC_URL }}js/jquery.pjax.js"></script>
 {% endcompress %}
 
 {% block extra_head %}{% endblock %}
@@ -80,7 +79,7 @@
 <h1>{% block title %}{% endblock %}</h1>
 </div>
 
-<div class="container">
+<div class="container main">
 <div class="row">
 <div class="span12 middle">
     {% block main %}{% endblock %}

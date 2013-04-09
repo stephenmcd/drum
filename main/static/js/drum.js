@@ -1,4 +1,5 @@
-$(function() {
+
+var setRatingClick = function() {
     // Drum hides the radio buttons for +1 -1 ratings, and uses
     // up/down arrow anchors. Attach click handlers to the arrow
     // anchors that when clicked, check the relevant hidden radio
@@ -21,4 +22,6 @@ $(function() {
         }, 'json');
         return false;
     });
-});
+};
+
+$(setRatingClick);
