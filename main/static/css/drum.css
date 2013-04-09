@@ -103,3 +103,6 @@ h1, .link-item, .comment-item, .comment-links {border-bottom-width:5px;}
 .comment-links {padding-bottom:5px;}
 #comments .rating {margin:1px 5px 0 3px !important;}
 #comments .rating i {opacity:0.7;}
+
+.comment-item {color:#aaa;}
+.comment-item .comment {color:#666;}
