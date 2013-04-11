@@ -48,5 +48,7 @@ def karma(sender, instance, **kwargs):
     value = int(instance.value)
     if not kwargs["created"]:
         value *= 2
-    queryset = Profile.objects.filter(user=instance.content_object.user)
-    queryset.update(karma=models.F("karma") + value)
+    content_object = instance.content_object
+    if instance.user != content_object.user:
+        queryset = Profile.objects.filter(user=content_object.user)
+        queryset.update(karma=models.F("karma") + value)
