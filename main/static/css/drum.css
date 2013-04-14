@@ -13,6 +13,9 @@ a.brand {
     text-decoration:none;
     color:#fff !important;
 }
+@media (max-width: 600px) {
+    a.brand {text-indent:40px; padding:0 !important; width:30px; overflow:hidden;
+}}
 
 /* Misc */
 .btn-profile {margin-top:20px;}
