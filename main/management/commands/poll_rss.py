@@ -21,7 +21,7 @@ class Command(BaseCommand):
                     Link.objects.create(**link)
 
     def entry_to_link_dict(self, entry):
-        link = {"title": entry.title, "user_id": 1}
+        link = {"title": entry.title, "user_id": 1, "gen_description": False}
         try:
             link["link"] = entry.summary.split('href="')[2].split('"')[0]
         except IndexError:
