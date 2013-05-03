@@ -7,9 +7,9 @@ It is intended to demonstate some of the non-CMS capabilities
 of Mezzanine, such as threaded comments, ratings, and public
 user accounts.
 
-Check out the blog post, `Building Social Apps with Mezzanine
-<http://blog.jupo.org/2013/04/30/drum/>`_, which contains a
-detailed walk-through of how Drum was built.
+Check out the blog post `Building Social Apps with Mezzanine
+<http://blog.jupo.org/2013/04/30/building-social-apps-with-mezzanine-drum/>`_,
+which contains adetailed walk-through of how Drum was built.
 
 Installation
 ============
