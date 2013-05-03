@@ -5,9 +5,11 @@ Drum
 Drum is a Reddit / Hacker News clone, built using Mezzanine.
 It is intended to demonstate some of the non-CMS capabilities
 of Mezzanine, such as threaded comments, ratings, and public
-user accounts. Check out the blog post,
-`Building Social Apps with Mezzanine <http://blog.jupo.org/2013/04/30/drum/>`_,
-which contains a detail walk-through of how Drum was built.
+user accounts.
+
+Check out the blog post, `Building Social Apps with Mezzanine
+<http://blog.jupo.org/2013/04/30/drum/>`_, which contains a
+detailed walk-through of how Drum was built.
 
 Installation
 ============
