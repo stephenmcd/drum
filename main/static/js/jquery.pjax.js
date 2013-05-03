@@ -32,6 +32,14 @@ if (window.history && window.history.pushState && !navigator.userAgent.match(/(i
                 document.title = title;
                 document.getElementsByTagName('body')[0].innerHTML = body;
                 setRatingClick()
+
+$(function() {
+    $('.reply').click(function() {
+        $('.reply-form').hide();
+        $(this).next('.reply-form').toggle();
+    });
+});
+
     $('.middle input:text, .middle input:password, textarea').addClass('input-xlarge');
     $('.control-group label').addClass('control-label');
                 scrollTo(0, 0);
@@ -59,8 +67,8 @@ if (window.history && window.history.pushState && !navigator.userAgent.match(/(i
             }
             if (event.state) {
                 pjax(event.state.url || location.href);
-            } else {
-                location = location.href;
+            // } else {
+            //     location = location.href;
             }
         });
 
