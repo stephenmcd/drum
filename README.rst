@@ -9,7 +9,7 @@ user accounts.
 
 Check out the blog post `Building Social Apps with Mezzanine
 <http://blog.jupo.org/2013/04/30/building-social-apps-with-mezzanine-drum/>`_,
-which contains adetailed walk-through of how Drum was built.
+which contains a detailed walk-through of how Drum was built.
 
 Installation
 ============
