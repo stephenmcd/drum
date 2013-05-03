@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 def order_by_score(queryset, score_fields, date_field, reverse=True):
     """
-    Take some queryset (links or comments) and orders them by score,
+    Take some queryset (links or comments) and order them by score,
     which is basically "rating_sum / age_in_seconds ^ scale", where
     scale is a constant that can be used to control how quickly scores
     reduce over time. To perform this in the database, it needs to
@@ -17,13 +17,14 @@ def order_by_score(queryset, score_fields, date_field, reverse=True):
     scale = getattr(settings, "SCORE_SCALE_FACTOR", 2)
 
     # Timestamp SQL function snippets mapped to DB backends.
-    # Defining these assumes the SQL fucntions POW() and NOW()
-    # are available for the db backend.
-    db_engine = settings.DATABASES[queryset.db]["ENGINE"].rsplit(".", 1)[1]
-    timestamp_sql = {
+    # Defining these assumes the SQL functions POW() and NOW()
+    # are available for the DB backend.
+    timestamp_sqls = {
         "mysql": "UNIX_TIMESTAMP(%s)",
         "postgresql_psycopg2": "EXTRACT(EPOCH FROM %s)" ,
-    }.get(db_engine)
+    }
+    db_engine = settings.DATABASES[queryset.db]["ENGINE"].rsplit(".", 1)[1]
+    timestamp_sql = timestamp_sqls.get(db_engine)
 
     if timestamp_sql:
         score_sql = "(%s) / POW(%s - %s, %s)" % (

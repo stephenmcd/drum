@@ -27,7 +27,7 @@ class Link(Displayable, Ownable):
 
 class Profile(models.Model):
 
-    user = models.OneToOneField("auth.user")
+    user = models.OneToOneField("auth.User")
     website = models.URLField(blank=True)
     bio = models.TextField(blank=True)
     karma = models.IntegerField(default=0, editable=False)
@@ -37,7 +37,7 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=Rating)
-def karma(sender, instance, **kwargs):
+def karma(sender, rating, **kwargs):
     """
     Each time a rating is saved, check its value and modify the
     profile karma for the related object's user accordingly.
@@ -45,10 +45,10 @@ def karma(sender, instance, **kwargs):
     we can assume that the existing rating is in the other direction,
     so we multiply the karma modifier by 2.
     """
-    value = int(instance.value)
+    value = int(rating.value)
     if not kwargs["created"]:
         value *= 2
-    content_object = instance.content_object
-    if instance.user != content_object.user:
+    content_object = rating.content_object
+    if rating.user != content_object.user:
         queryset = Profile.objects.filter(user=content_object.user)
         queryset.update(karma=models.F("karma") + value)
