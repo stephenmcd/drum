@@ -27,7 +27,9 @@ INSTALLED_APPS = (
     "mezzanine.accounts",
 )
 
-MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES)
+MIDDLEWARE_CLASSES = (["mezzanine.core.middleware.UpdateCacheMiddleware"] +
+                      list(MIDDLEWARE_CLASSES) +
+                      ["mezzanine.core.middleware.FetchFromCacheMiddleware"])
 MIDDLEWARE_CLASSES.remove("mezzanine.pages.middleware.PageMiddleware")
 
 # Mezzanine
