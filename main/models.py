@@ -37,7 +37,7 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=Rating)
-def karma(sender, rating, **kwargs):
+def karma(sender, **kwargs):
     """
     Each time a rating is saved, check its value and modify the
     profile karma for the related object's user accordingly.
@@ -45,6 +45,7 @@ def karma(sender, rating, **kwargs):
     we can assume that the existing rating is in the other direction,
     so we multiply the karma modifier by 2.
     """
+    rating = kwargs["instance"]
     value = int(rating.value)
     if not kwargs["created"]:
         value *= 2
