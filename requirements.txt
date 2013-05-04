@@ -4,3 +4,4 @@ django-extensions
 feedparser
 gunicorn
 psycopg2
+python-memcached
