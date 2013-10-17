@@ -40,6 +40,13 @@ RATINGS_ACCOUNT_REQUIRED = True
 COMMENTS_ACCOUNT_REQUIRED = True
 ACCOUNTS_PROFILE_VIEWS_ENABLED = True
 
+ADMIN_MENU_ORDER = (
+    ("Content", ("main.Link", "pages.Page", "blog.BlogPost",
+       "generic.ThreadedComment", ("Media Library", "fb_browse"),)),
+    ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
+    ("Users", ("auth.User", "auth.Group",)),
+)
+
 # Drum
 ALLOWED_DUPLICATE_LINK_HOURS = 24 * 7 * 3
 ITEMS_PER_PAGE = 20
