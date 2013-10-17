@@ -21,6 +21,7 @@ class Link(Displayable, Ownable):
     def get_absolute_url(self):
         return ("link_detail", (), {"slug": self.slug})
 
+    @property
     def domain(self):
         return urlparse(self.link).netloc
 
