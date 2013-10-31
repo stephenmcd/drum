@@ -24,3 +24,10 @@ Basic setup::
   $ cp local_settings.py.template local_settings.py
   $ ./manage.py createdb --noinput
   $ ./manage.py runserver
+
+Sites Using Drum
+================
+
+* `Food News <http://food.hypertexthero.com>`_
+
+
