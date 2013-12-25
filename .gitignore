@@ -1,0 +1,8 @@
+syntax: glob
+*.pyc
+*.pyo
+*.db
+.DS_Store
+local_settings.py
+
+*.pid
