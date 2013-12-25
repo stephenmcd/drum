@@ -1,4 +1,3 @@
-
 Created by `Stephen McDonald <http://twitter.com/stephen_mcd>`_
 
 Drum
@@ -18,7 +17,7 @@ Installation
 
 Basic setup::
 
-  $ hg clone ssh://hg@bitbucket.org/stephenmcd/drum
+  $ git clone git@github.com:stephenmcd/drum.git
   $ cd drum
   $ pip install -r requirements.txt
   $ cp local_settings.py.template local_settings.py
