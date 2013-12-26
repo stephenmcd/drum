@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 
 from mezzanine.project_template.settings import *
 import os

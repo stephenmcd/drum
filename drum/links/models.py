@@ -1,6 +1,9 @@
+from __future__ import unicode_literals
+from future import standard_library
+from future.builtins import int
 
 from time import time
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from django.db import models
 from django.db.models.signals import post_save
