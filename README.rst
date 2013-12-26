@@ -64,6 +64,26 @@ default``). If you'd like to specify a different username and password
 during set up, simply exclude the ``--noinput`` option included above
 when running ``createdb``.
 
+RSS Import
+==========
+
+One difficulty faced with a Drum site is building up an initial user
+base, as well as a good amount of interesting link content. This is
+a bit of a chicken and egg problem, in that each of these depends on
+the other. One way to address this is to automatically populate
+the site with interesting links. To help with this, Drum provides the
+Django management command `poll_rss` for retrieving links from an RSS
+feed, and populating the site with them. For example, suppose I was a
+terrible person and wanted to populate my Drum site with links directly
+from the Hacker News front page and the programming section of Reddit::
+
+    python manage.py poll_rss https://news.ycombinator.com/rss http://www.reddit.com/r/programming/.rss
+
+Here you can see multiple RSS feeds being passed to the command, which
+I could then run on a scheduled basis using a cron job. Note that to
+use the `poll_rss` command, you'll need the `feedparser`_ library
+installed.
+
 Contributing
 ============
 
@@ -120,6 +140,7 @@ Sites Using Drum
 .. _`South`: http://south.aeracode.org/
 .. _`Django coding style`: http://docs.djangoproject.com/en/dev/internals/contributing/#coding-style
 .. _`PEP 8`: http://www.python.org/dev/peps/pep-0008/
+.. _`feedparser`: http://code.google.com/p/feedparser/
 .. _`Github`: http://github.com/stephenmcd/drum/
 .. _`Bitbucket`: http://bitbucket.org/stephenmcd/drum/
 .. _`Github issue tracker`: http://github.com/stephenmcd/drum/issues
