@@ -1,7 +1,8 @@
-Created by `Stephen McDonald <http://twitter.com/stephen_mcd>`_
 
 Drum
 ====
+
+Created by `Stephen McDonald <http://twitter.com/stephen_mcd>`_
 
 Drum is a Reddit / Hacker News clone, built using `Mezzanine`_
 and `Django`_. It is `BSD licensed`_, and designed to demonstate
@@ -72,7 +73,7 @@ base, as well as a good amount of interesting link content. This is
 a bit of a chicken and egg problem, in that each of these depends on
 the other. One way to address this is to automatically populate
 the site with interesting links. To help with this, Drum provides the
-Django management command `poll_rss` for retrieving links from an RSS
+Django management command ``poll_rss`` for retrieving links from an RSS
 feed, and populating the site with them. For example, suppose I was a
 terrible person and wanted to populate my Drum site with links directly
 from the Hacker News front page and the programming section of Reddit::
@@ -81,7 +82,7 @@ from the Hacker News front page and the programming section of Reddit::
 
 Here you can see multiple RSS feeds being passed to the command, which
 I could then run on a scheduled basis using a cron job. Note that to
-use the `poll_rss` command, you'll need the `feedparser`_ library
+use the ``poll_rss`` command, you'll need the `feedparser`_ library
 installed.
 
 Contributing
