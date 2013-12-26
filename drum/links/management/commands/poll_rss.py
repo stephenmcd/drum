@@ -9,7 +9,7 @@ from feedparser import parse
 
 from mezzanine.generic.models import Rating
 
-from ...models import Link
+from drum.links.models import Link
 
 
 class Command(BaseCommand):

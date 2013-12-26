@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from mezzanine.core.admin import DisplayableAdmin
-from .models import Link
+from drum.links.models import Link
 
 
 class LinkAdmin(DisplayableAdmin):

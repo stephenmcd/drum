@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns("",
     ("^admin/", include(admin.site.urls)),
-    ("^", include("main.urls")),
+    ("^", include("drum.links.urls")),
     ("^", include("mezzanine.urls")),
 )
 

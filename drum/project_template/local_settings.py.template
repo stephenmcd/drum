@@ -1,7 +1,9 @@
 
 DEBUG = True
 
-SECRET_KEY = ""
+# Make these unique, and don't share it with anybody.
+SECRET_KEY = "%(SECRET_KEY)s"
+NEVERCACHE_KEY = "%(NEVERCACHE_KEY)s"
 
 DATABASES = {
     "default": {

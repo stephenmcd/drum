@@ -12,8 +12,8 @@ from mezzanine.conf import settings
 from mezzanine.generic.models import ThreadedComment
 from mezzanine.utils.views import paginate
 
-from .models import Link
-from .utils import order_by_score
+from drum.links.models import Link
+from drum.links.utils import order_by_score
 
 
 class UserFilterView(ListView):

@@ -11,7 +11,7 @@ ROOT_URLCONF = "%s.urls" % PROJECT_DIRNAME
 TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 
 INSTALLED_APPS = (
-    "main",
+    "drum",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -33,7 +33,7 @@ MIDDLEWARE_CLASSES = (["mezzanine.core.middleware.UpdateCacheMiddleware"] +
 MIDDLEWARE_CLASSES.remove("mezzanine.pages.middleware.PageMiddleware")
 
 # Mezzanine
-AUTH_PROFILE_MODULE = "main.Profile"
+AUTH_PROFILE_MODULE = "drum.Profile"
 SITE_TITLE = "Drum"
 RATINGS_RANGE = (-1, 1)
 RATINGS_ACCOUNT_REQUIRED = True
@@ -41,7 +41,7 @@ COMMENTS_ACCOUNT_REQUIRED = True
 ACCOUNTS_PROFILE_VIEWS_ENABLED = True
 
 ADMIN_MENU_ORDER = (
-    ("Content", ("main.Link", "pages.Page", "blog.BlogPost",
+    ("Content", ("links.Link", "pages.Page", "blog.BlogPost",
        "generic.ThreadedComment", ("Media Library", "fb_browse"),)),
     ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
     ("Users", ("auth.User", "auth.Group",)),

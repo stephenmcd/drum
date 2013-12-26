@@ -2,7 +2,7 @@
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 
-from .views import LinkList, LinkCreate, LinkDetail, CommentList
+from drum.links.views import LinkList, LinkCreate, LinkDetail, CommentList
 
 
 urlpatterns = patterns("",

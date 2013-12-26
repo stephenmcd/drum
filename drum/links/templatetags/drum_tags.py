@@ -2,8 +2,8 @@
 from collections import defaultdict
 from django import template
 
-from ..utils import order_by_score
-from ..views import CommentList
+from drum.links.utils import order_by_score
+from drum.links.views import CommentList
 
 
 register = template.Library()
