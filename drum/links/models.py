@@ -3,7 +3,11 @@ from future import standard_library
 from future.builtins import int
 
 from time import time
-from urllib.parse import urlparse
+
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 from django.db import models
 from django.db.models.signals import post_save
