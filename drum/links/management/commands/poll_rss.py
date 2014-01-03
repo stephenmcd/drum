@@ -84,6 +84,9 @@ class Command(BaseCommand):
 
     def follow_old(self):
         for link in Link.objects.all():
-            qs = Link.objects.filter(id=link.id)
-            qs.update(link=self.follow_redirects(link.link))
-
+            try:
+                link = self.follow_redirects(link.link)
+            except Exception, e:
+                print "%s - skipping %s" % (e, link.link)
+            else:
+                Link.objects.filter(id=link.id).update(link=link)
