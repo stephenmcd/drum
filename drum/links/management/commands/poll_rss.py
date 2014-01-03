@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 if options["follow"]:
                     try:
                         link["link"] = self.follow_redirects(link["link"])
-                    except requests.RequestException, e:
+                    except Exception, e:
                         print "%s - skipping %s" % (e, link["link"])
                         continue
                 link["user_id"] = user_id
