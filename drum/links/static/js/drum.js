@@ -1,4 +1,11 @@
 
+var contents = function(html, tag) {
+    if (html.indexOf('<' + tag + '>') >= 0) {
+        return html.split('<' + tag + '>')[1].split('</' + tag + '>')[0];
+    }
+    return '';
+};
+
 var setRatingClick = function() {
     // Drum hides the radio buttons for +1 -1 ratings, and uses
     // up/down arrow anchors. Attach click handlers to the arrow
@@ -20,7 +27,14 @@ var setRatingClick = function() {
             if (data.location) {
                 location = data.location;
             } else {
-                container.find('.score').text(data.rating_sum);
+                //container.find('.score').text(data.rating_sum);
+                $('.main').fadeTo(0, .5);
+                $.get(location.href, {pjax: 1}, function(html) {
+                    $('.main').fadeTo(0, 1);
+                    var body = contents(html, 'body');
+                    document.getElementsByTagName('body')[0].innerHTML = body;
+                    setRatingClick();
+                });
             }
         }, 'json');
 

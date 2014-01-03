@@ -9,13 +9,6 @@ if (window.history && window.history.pushState && !navigator.userAgent.match(/(i
         var active = false;
         var initial = true;
 
-        var contents = function(html, tag) {
-            if (html.indexOf('<' + tag + '>') >= 0) {
-                return html.split('<' + tag + '>')[1].split('</' + tag + '>')[0];
-            }
-            return '';
-        };
-
         var pjax = function(url, push) {
             $('.main').fadeTo(0, .5);
             $.get(url, {pjax: 1}, function(html) {
@@ -31,7 +24,7 @@ if (window.history && window.history.pushState && !navigator.userAgent.match(/(i
                 }
                 document.title = title;
                 document.getElementsByTagName('body')[0].innerHTML = body;
-                setRatingClick()
+                setRatingClick();
 
 $(function() {
     $('.reply').click(function() {
