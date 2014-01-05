@@ -151,8 +151,10 @@ class CommentList(ScoreOrderingView):
     score_fields = ("rating_sum",)
 
     def get_queryset(self):
-        return ThreadedComment.objects.visible().select_related("user",
-            "user__profile").prefetch_related("content_object")
+        qs = ThreadedComment.objects.filter(is_removed=False, is_public=True)
+        select = ("user", "user__profile",)
+        prefetch = ("content_object",)
+        return qs.select_related(*select).prefetch_related(*prefetch)
 
     def get_title(self, context):
         if context["profile_user"]:
