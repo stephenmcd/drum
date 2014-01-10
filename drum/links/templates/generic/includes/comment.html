@@ -1,4 +1,4 @@
-{% load i18n mezzanine_tags comment_tags rating_tags future %}
+{% load i18n mezzanine_tags comment_tags rating_tags drum_tags future %}
 
 <ul class="unstyled comment-thread">
     {% for comment in comments_for_thread %}
@@ -7,7 +7,7 @@
 
         <p class="comment-meta">
             <a href="{% url "profile" comment.user.username %}">{{ comment.user.profile }}</a>
-            {{ comment.submit_date|timesince }} ago
+            {{ comment.submit_date|short_timesince }} ago
         </p>
         <p class="comment-comment">{{ comment.comment|comment_filter }}</p>
 
@@ -27,7 +27,6 @@
                 <input class="btn btn-primary btn-large" type="submit" value="{% trans "Reply" %}">
             </form>
         </div>
-
 
     {% else %}
 

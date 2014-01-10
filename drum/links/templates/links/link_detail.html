@@ -15,7 +15,7 @@
     <div class="link-meta">
         {% rating_for object %}
         by <a href="{% url "profile" object.user.username %}">{{ object.user.profile }}</a>
-        {{ object.publish_date|timesince }} ago
+        {{ object.publish_date|short_timesince }} ago
     </div>
     {% order_comments_by_score_for object %}
     {% comments_for object %}

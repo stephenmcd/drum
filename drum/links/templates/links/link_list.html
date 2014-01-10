@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load mezzanine_tags rating_tags future %}
+{% load mezzanine_tags rating_tags drum_tags future %}
 
 {% block meta_title %}{{ title|default:"Home" }}{% endblock %}
 {% block title %}{{ title }}{% endblock %}
@@ -16,7 +16,7 @@
             <span class="domain">({{ link.domain }})</span>
         </h2>
         by <a class="profile" href="{% url "profile" link.user.username %}">{{ link.user.profile }}</a>
-        {{ link.publish_date|timesince }} ago |
+        {{ link.publish_date|short_timesince }} ago |
         <a class="comments" href="{{ link.get_absolute_url }}">{{ link.comments_count }} comment{{ link.comments_count|pluralize }} </a>
     </div>
 </div>
