@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 if options["follow"]:
                     try:
                         link["link"] = self.follow_redirects(link["link"])
-                    except Exception, e:
+                    except Exception as e:
                         print "%s - skipping %s" % (e, link["link"])
                         continue
                 link["user_id"] = user_id
@@ -86,7 +86,7 @@ class Command(BaseCommand):
         for link in Link.objects.all():
             try:
                 link = self.follow_redirects(link.link)
-            except Exception, e:
+            except Exception as e:
                 print "%s - skipping %s" % (e, link.link)
             else:
                 Link.objects.filter(id=link.id).update(link=link)
