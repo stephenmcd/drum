@@ -5,7 +5,7 @@ from datetime import timedelta
 
 from django.contrib.auth.models import User
 from django.contrib.messages import info, error
-from django.forms.models import modelform_factory
+
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.timezone import now
 from django.views.generic import ListView, CreateView, DetailView
@@ -14,6 +14,7 @@ from mezzanine.conf import settings
 from mezzanine.generic.models import ThreadedComment
 from mezzanine.utils.views import paginate
 
+from drum.links.forms import LinkForm
 from drum.links.models import Link
 from drum.links.utils import order_by_score
 
@@ -88,7 +89,7 @@ class LinkList(LinkView, ScoreOrderingView):
     """
 
     date_field = "publish_date"
-    score_fields = ("rating_sum", "comments_count")
+    score_fields = ["rating_sum", "comments_count"]
 
     def get_title(self, context):
         if context["by_score"]:
@@ -106,13 +107,12 @@ class LinkCreate(CreateView):
     so that we can provide our own descriptions.
     """
 
-    form_class = modelform_factory(Link, fields=("title", "link",
-                                                 "description"))
+    form_class = LinkForm
     model = Link
 
     def form_valid(self, form):
         hours = getattr(settings, "ALLOWED_DUPLICATE_LINK_HOURS", None)
-        if hours:
+        if hours and form.instance.link:
             lookup = {
                 "link": form.instance.link,
                 "publish_date__gt": now() - timedelta(hours=hours),
@@ -148,12 +148,12 @@ class CommentList(ScoreOrderingView):
     """
 
     date_field = "submit_date"
-    score_fields = ("rating_sum",)
+    score_fields = ["rating_sum"]
 
     def get_queryset(self):
         qs = ThreadedComment.objects.filter(is_removed=False, is_public=True)
-        select = ("user", "user__profile",)
-        prefetch = ("content_object",)
+        select = ["user", "user__profile"]
+        prefetch = ["content_object"]
         return qs.select_related(*select).prefetch_related(*prefetch)
 
     def get_title(self, context):

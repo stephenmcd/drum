@@ -323,6 +323,7 @@ SEARCH_MODEL_CHOICES = ("links.Link",)
 # Drum settings
 ALLOWED_DUPLICATE_LINK_HOURS = 24 * 7 * 3
 ITEMS_PER_PAGE = 20
+LINK_REQUIRED = False
 
 ###################
 # DEPLOY SETTINGS #

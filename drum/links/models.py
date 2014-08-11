@@ -9,28 +9,37 @@ try:
 except ImportError:
     from urlparse import urlparse
 
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from mezzanine.core.models import Displayable, Ownable
+from mezzanine.core.request import current_request
 from mezzanine.generic.models import Rating
 from mezzanine.generic.fields import RatingField, CommentsField
 
 
 class Link(Displayable, Ownable):
 
-    link = models.URLField()
+    link = models.URLField(null=True,
+        blank=(not getattr(settings, "LINK_REQUIRED", False)))
     rating = RatingField()
     comments = CommentsField()
 
-    @models.permalink
     def get_absolute_url(self):
-        return ("link_detail", (), {"slug": self.slug})
+        return reverse("link_detail", kwargs={"slug": self.slug})
 
     @property
     def domain(self):
-        return urlparse(self.link).netloc
+        return urlparse(self.url).netloc
+
+    @property
+    def url(self):
+        if self.link:
+            return self.link
+        return current_request().build_absolute_uri(self.get_absolute_url())
 
 
 class Profile(models.Model):

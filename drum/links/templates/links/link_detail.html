@@ -5,7 +5,7 @@
 {% block meta_description %}{% metablock %}{{ object.description }}{% endmetablock %}{% endblock %}
 {% block meta_title %}{{ object.title }}{% endblock %}
 {% block title %}
-<a href="{{ object.link }}">{{ object.title }}</a>
+<a href="{{ object.url }}">{{ object.title }}</a>
 <span class="domain">({{ object.domain }})</span>
 {% endblock %}
 
