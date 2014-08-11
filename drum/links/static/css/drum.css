@@ -109,3 +109,5 @@ h1, .link-item, .comment-item, .comment-links {border-bottom-width:5px;}
 
 .comment-item {color:#aaa;}
 .comment-item .comment {color:#666;}
+
+.has-error .help-block {color: #b94a48;}
