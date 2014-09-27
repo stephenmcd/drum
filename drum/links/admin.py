@@ -12,6 +12,7 @@ class LinkAdmin(DisplayableAdmin):
     list_display_links = ("id",)
     list_editable = ("title", "link", "status")
     list_filter = ("status", "user__username")
+    search_fields = ("title", "link", "user__username", "user__email")
     ordering = ("-publish_date",)
 
     fieldsets = (
