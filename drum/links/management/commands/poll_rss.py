@@ -60,12 +60,20 @@ class Command(BaseCommand):
                     obj.rating.add(Rating(value=1, user_id=user_id))
                     print "Added %s" % obj
 
+    def link_from_entry(self, entry):
+        """
+        Subclasses can override this to perform custom link
+        extraction from an entry - eg Tumblr link posts
+        will contain the real link inside the summary.
+        """
+        return entry.link
+
     def entry_to_link_dict(self, entry):
-        link = {"title": entry.title, "gen_description": False}
-        try:
-            link["link"] = entry.summary.split('href="')[2].split('"')[0]
-        except IndexError:
-            link["link"] = entry.link
+        link = {
+            "title": entry.title,
+            "link": self.link_from_entry(entry),
+            "gen_description": False,
+        }
         try:
             publish_date = entry.published_parsed
         except AttributeError:
