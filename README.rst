@@ -85,6 +85,36 @@ I could then run on a scheduled basis using a cron job. Note that to
 use the ``poll_rss`` command, you'll need the `feedparser`_ library
 installed.
 
+Auto Tagging
+============
+
+Drum provides some basic support for automatically tagging new links
+as they're added. This is first configured by setting the ``AUTO_TAG``
+setting to ``True``. With that set, when a new link is added, its
+given title is broken up into keywords, and if those keywords already
+exist as tags in the database, they're applied to the newly added link.
+
+This means that for auto-tagging to work, the tags must already exist
+in the database. You can either add them manually via the admin, or
+if you have a large number of existing links, you can use the
+``auto_tag`` management command Drum provides, which will analyse the
+titles of all your existing links, and provide tags it extracts from
+them. This makes use of the `topia.termextract`_ package which
+you'll first need to install::
+
+    python manage.py auto_tag --generate=100 --assign --remove
+
+The ``--generate`` option must be provided to extract tags, and limits
+the number of tags extracted. Generally more tags will be extracted
+than are relevant, depending on your existing set of links, so
+experiment with different values here. You'll likely want to review all
+the tags added, deleting some and manually editing others, via the
+Django admin interface. The ``--assign`` option will go back and assign
+all tags in the database to all links in the database, as would occur
+if they were newly created. The ``--remove`` option will cause all
+existing tags to be removed.
+
+
 Contributing
 ============
 
@@ -142,6 +172,7 @@ Sites Using Drum
 .. _`Django coding style`: http://docs.djangoproject.com/en/dev/internals/contributing/#coding-style
 .. _`PEP 8`: http://www.python.org/dev/peps/pep-0008/
 .. _`feedparser`: http://code.google.com/p/feedparser/
+.. _`topia.termextract`: https://pypi.python.org/pypi/topia.termextract/
 .. _`Github`: http://github.com/stephenmcd/drum/
 .. _`Bitbucket`: http://bitbucket.org/stephenmcd/drum/
 .. _`Github issue tracker`: http://github.com/stephenmcd/drum/issues
