@@ -13,12 +13,11 @@ from __future__ import absolute_import, unicode_literals
 
 # Controls the ordering and grouping of the admin menu.
 #
-# ADMIN_MENU_ORDER = (
-#     ("Content", ("pages.Page", "blog.BlogPost",
-#        "generic.ThreadedComment", ("Media Library", "fb_browse"),)),
-#     ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
-#     ("Users", ("auth.User", "auth.Group",)),
-# )
+ADMIN_MENU_ORDER = (
+    ("Content", ("links.Link", "generic.Keyword", "generic.ThreadedComment")),
+    ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
+    ("Users", ("auth.User", "auth.Group",)),
+)
 
 # A three item sequence, each containing a sequence of template tags
 # used to render the admin dashboard.
@@ -324,6 +323,7 @@ SEARCH_MODEL_CHOICES = ("links.Link",)
 ALLOWED_DUPLICATE_LINK_HOURS = 24 * 7 * 3
 ITEMS_PER_PAGE = 20
 LINK_REQUIRED = False
+AUTO_TAG = True
 
 ###################
 # DEPLOY SETTINGS #
