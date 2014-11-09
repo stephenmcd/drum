@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load mezzanine_tags keyword_tags %}
+
+{% block meta_title %}Tags{% endblock %}
+{% block title %}Tags{% endblock %}
+
+{% block main %}
+{% keywords_for links.link as tags %}
+{% if tags %}
+<ul class="tag-cloud">
+{% for tag in tags|sort_by:"title" %}
+<li>
+    <a href="{% url "link_list_tag" tag.slug %}"
+        class="tag-weight-{{ tag.weight }}">{{ tag }}</a>
+    ({{ tag.item_count }})
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

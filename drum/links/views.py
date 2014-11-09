@@ -8,10 +8,10 @@ from django.contrib.messages import info, error
 
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, TemplateView
 
 from mezzanine.conf import settings
-from mezzanine.generic.models import ThreadedComment
+from mezzanine.generic.models import ThreadedComment, Keyword
 from mezzanine.utils.views import paginate
 
 from drum.links.forms import LinkForm
@@ -91,7 +91,17 @@ class LinkList(LinkView, ScoreOrderingView):
     date_field = "publish_date"
     score_fields = ["rating_sum", "comments_count"]
 
+    def get_queryset(self):
+        queryset = super(LinkList, self).get_queryset()
+        tag = self.kwargs.get("tag")
+        if tag:
+            queryset = queryset.filter(keywords__keyword__slug=tag)
+        return queryset.prefetch_related("keywords__keyword")
+
     def get_title(self, context):
+        tag = self.kwargs.get("tag")
+        if tag:
+            return get_object_or_404(Keyword, slug=tag).title
         if context["by_score"]:
             return ""  # Homepage
         if context["profile_user"]:
@@ -164,3 +174,6 @@ class CommentList(ScoreOrderingView):
         else:
             return "Latest comments"
 
+
+class TagList(TemplateView):
+    template_name = "links/tag_list.html"

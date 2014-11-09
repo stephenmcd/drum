@@ -112,3 +112,16 @@ h1, .link-item, .comment-item, .comment-links {border-bottom-width:5px;}
 
 .has-error .help-block {color: #b94a48;}
 .form-errors {margin-top:20px;}
+
+.tag-cloud {margin:10px 0; text-align:justify;}
+.tag-cloud li {
+    list-style-type: none;
+    display:inline;
+    line-height:300%;
+    white-space:nowrap;
+    margin-right:10px;
+}
+.tag-weight-4 {font-size:400%;}
+.tag-weight-3 {font-size:300%;}
+.tag-weight-2 {font-size:200%;}
+.tag-weight-1 {font-size:100%;}

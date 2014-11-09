@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 
-from drum.links.views import LinkList, LinkCreate, LinkDetail, CommentList
+from drum.links.views import LinkList, LinkCreate, LinkDetail, CommentList, TagList
 
 
 urlpatterns = patterns("",
@@ -34,4 +34,10 @@ urlpatterns = patterns("",
     url("^users/(?P<username>.*)/comments/$",
         CommentList.as_view(), {"by_score": False},
         name="comment_list_user"),
+    url("^tags/$",
+        TagList.as_view(),
+        name="tag_list"),
+    url("^tags/(?P<tag>.*)/$",
+        LinkList.as_view(),
+        name="link_list_tag"),
 )

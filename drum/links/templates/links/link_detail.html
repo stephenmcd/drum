@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load mezzanine_tags rating_tags comment_tags drum_tags future %}
+{% load mezzanine_tags rating_tags keyword_tags comment_tags drum_tags future %}
 
 {% block meta_description %}{% metablock %}{{ object.description }}{% endmetablock %}{% endblock %}
 {% block meta_title %}{{ object.title }}{% endblock %}
@@ -16,6 +16,10 @@
         {% rating_for object %}
         by <a href="{% url "profile" object.user.username %}">{{ object.user.profile }}</a>
         {{ object.publish_date|short_timesince }} ago
+        {% keywords_for link as tags %}
+        {% for tag in tags %}
+        | <a href="{% url "link_list_tag" tag.slug %}">{{ tag }}</a>
+        {% endfor %}
     </div>
     {% order_comments_by_score_for object %}
     {% comments_for object %}
