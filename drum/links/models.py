@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 from future import standard_library
 from future.builtins import int
 
-from string import punctuation
+from re import sub, split
 from time import time
 from operator import ior
 
@@ -48,7 +48,10 @@ class Link(Displayable, Ownable):
     def save(self, *args, **kwargs):
         keywords = []
         if not self.keywords_string and getattr(settings, "AUTO_TAG", False):
-            keywords = self.title.rstrip(punctuation).split()
+            variations = lambda word: [word,
+                sub("^([^A-Za-z0-9])*|([^A-Za-z0-9]|s)*$", "", word),
+                sub("^([^A-Za-z0-9])*|([^A-Za-z0-9])*$", "", word)]
+            keywords = sum(map(variations, split("\s|/", self.title)), [])
         super(Link, self).save(*args, **kwargs)
         if keywords:
             lookup = reduce(ior, [Q(title__iexact=k) for k in keywords])
