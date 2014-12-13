@@ -5,7 +5,7 @@ Drum
 Created by `Stephen McDonald <http://twitter.com/stephen_mcd>`_
 
 Drum is a Reddit / Hacker News clone, built using `Mezzanine`_
-and `Django`_. It is `BSD licensed`_, and designed to demonstate
+and `Django`_. It is `BSD licensed`_, and designed to demonstrate
 some of the non-CMS capabilities of Mezzanine, such as threaded
 comments, ratings, and public user accounts.
 
