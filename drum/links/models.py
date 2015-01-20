@@ -25,6 +25,9 @@ from mezzanine.generic.fields import RatingField, CommentsField
 from mezzanine.utils.urls import slugify
 
 
+USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+
+
 class Link(Displayable, Ownable):
 
     link = models.URLField(null=True,
@@ -61,7 +64,7 @@ class Link(Displayable, Ownable):
 
 class Profile(models.Model):
 
-    user = models.OneToOneField("auth.User")
+    user = models.OneToOneField(USER_MODEL)
     website = models.URLField(blank=True)
     bio = models.TextField(blank=True)
     karma = models.IntegerField(default=0, editable=False)
