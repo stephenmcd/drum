@@ -11,8 +11,8 @@ from drum.links.views import CommentList, USER_PROFILE_RELATED_NAME
 register = template.Library()
 
 
-@register.simple_tag(takes_context=True)
-def get_profile(context, user):
+@register.filter
+def profile_for(user):
     """
     Returns the profile object associated with the given user.
     """
