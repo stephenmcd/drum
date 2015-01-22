@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% load i18n future mezzanine_tags %}
+{% load i18n future mezzanine_tags drum_tags %}
 
 {% block meta_title %}{{ profile_user.username }}{% endblock %}
-{% block title %}{{ profile_user.profile }}{% endblock %}
+{% block title %}{% get_profile profile_user %}{% endblock %}
 {% block body_id %}account{% endblock %}
 
 {% block main %}
@@ -13,7 +13,7 @@
 {% endif %}
 <div class="clearfix">
 
-    {% with profile_user.profile as profile %}
+    {% with get_profile profile_user as profile %}
     {% if profile.bio %}
     <p class="bio">{{ profile.bio|urlize|linebreaks }}</p>
     {% endif %}

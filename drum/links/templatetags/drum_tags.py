@@ -12,6 +12,14 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
+def get_profile(context, user):
+    """
+    Returns the profile object associated with the given user.
+    """
+    return getattr(user, USER_PROFILE_RELATED_NAME)
+
+
+@register.simple_tag(takes_context=True)
 def order_comments_by_score_for(context, link):
     """
     Preloads threaded comments in the same way Mezzanine initially does,

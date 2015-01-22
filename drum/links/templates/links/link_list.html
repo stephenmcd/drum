@@ -15,7 +15,7 @@
             <a href="{{ link.url }}">{{ link.title }}</a>
             <span class="domain">({{ link.domain }})</span>
         </h2>
-        by <a class="profile" href="{% url "profile" link.user.username %}">{{ link.user.profile }}</a>
+        by <a class="profile" href="{% url "profile" link.user.username %}">{% get_profile link.user %}</a>
         {{ link.publish_date|short_timesince }} ago |
         {% keywords_for link as tags %}
         {% for tag in tags %}

@@ -10,7 +10,7 @@
 {% for comment in object_list %}
 <div class="comment-item">
     <p class="comment">{{ comment.comment }}</p>
-    by <a href="{% url "profile" comment.user.username %}">{{ comment.user.profile }}</a>
+    by <a href="{% url "profile" comment.user.username %}">{% get_profile comment.user %}</a>
     {{ comment.submit_date|short_timesince }} ago in
     <a class="comments" href="{{ comment.get_absolute_url }}">{{ comment.content_object }}</a>
     <br clear="left">
