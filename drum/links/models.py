@@ -18,6 +18,7 @@ from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from mezzanine.accounts import get_profile_model
 from mezzanine.core.models import Displayable, Ownable
 from mezzanine.core.request import current_request
 from mezzanine.generic.models import Rating, Keyword, AssignedKeyword
@@ -88,5 +89,5 @@ def karma(sender, **kwargs):
         value *= 2
     content_object = rating.content_object
     if rating.user != content_object.user:
-        queryset = Profile.objects.filter(user=content_object.user)
+        queryset = get_profile_model().objects.filter(user=content_object.user)
         queryset.update(karma=models.F("karma") + value)
