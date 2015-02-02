@@ -15,7 +15,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 from mezzanine.core.models import Displayable, Ownable
@@ -74,18 +74,23 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=Rating)
+@receiver(post_delete, sender=Rating)
 def karma(sender, **kwargs):
     """
     Each time a rating is saved, check its value and modify the
     profile karma for the related object's user accordingly.
     Since ratings are either +1/-1, if a rating is being edited,
     we can assume that the existing rating is in the other direction,
-    so we multiply the karma modifier by 2.
+    so we multiply the karma modifier by 2. We also run this when
+    a rating is deleted (undone), in which case we just negate the
+    rating value from the karma.
     """
     rating = kwargs["instance"]
     value = int(rating.value)
-    if not kwargs["created"]:
-        value *= 2
+    if "created" not in kwargs:
+        value *= -1 #  Rating deleted
+    elif not kwargs["created"]:
+        value *= 2 #  Rating changed
     content_object = rating.content_object
     if rating.user != content_object.user:
         queryset = Profile.objects.filter(user=content_object.user)
