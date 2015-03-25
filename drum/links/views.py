@@ -20,17 +20,10 @@ from drum.links.models import Link
 from drum.links.utils import order_by_score
 
 
-def get_user_profile_related_name():
-    """
-    Returns the name to be used for reverse profile lookups from the user
-    object. That's "profile" for the ``drum.links.Profile``, but otherwise
-    depends on the model specified in ``AUTH_PROFILE_MODULE``.
-    """
-    profile_model = get_profile_model()
-    return profile_model.user.field.related_query_name()
-
-
-USER_PROFILE_RELATED_NAME = get_user_profile_related_name()
+# Returns the name to be used for reverse profile lookups from the user
+# object. That's "profile" for the ``drum.links.Profile``, but otherwise
+# depends on the model specified in ``AUTH_PROFILE_MODULE``.
+USER_PROFILE_RELATED_NAME = get_profile_model().user.field.related_query_name()
 
 
 class UserFilterView(ListView):
