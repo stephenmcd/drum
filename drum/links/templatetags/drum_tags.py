@@ -12,7 +12,7 @@ register = template.Library()
 
 
 @register.filter
-def profile_for(user):
+def get_profile(user):
     """
     Returns the profile object associated with the given user.
     """

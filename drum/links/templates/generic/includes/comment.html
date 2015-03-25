@@ -6,7 +6,7 @@
     {% if not comment.is_removed and comment.is_public %}
 
         <p class="comment-meta">
-            <a href="{% url "profile" comment.user.username %}">{{ comment.user|profile_for }}</a>
+            <a href="{% url "profile" comment.user.username %}">{{ comment.user|get_profile }}</a>
             {{ comment.submit_date|short_timesince }} ago
         </p>
         <p class="comment-comment">{{ comment.comment|comment_filter }}</p>
