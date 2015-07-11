@@ -38,6 +38,7 @@ Once installed, the command ``mezzanine-project`` can be used to
 create a new Mezzanine project, with Drum installed, in similar
 fashion to ``django-admin.py``::
 
+    # FIXME: add new instructions of how to create a project with drum
     $ mezzanine-project -a drum project_name
     $ cd project_name
     $ python manage.py createdb --noinput
@@ -54,10 +55,8 @@ the `FAQ section of the Mezzanine documentation`_ for more information.
 .. note::
 
     The ``createdb`` is a shortcut for using Django's ``syncdb``
-    command and setting the initial migration state for `South`_. You
+    command and setting the initial migration state. You
     can alternatively use ``syncdb`` and ``migrate`` if preferred.
-    South is automatically added to INSTALLED_APPS if the
-    ``USE_SOUTH`` setting is set to ``True``.
 
 You should then be able to browse to http://127.0.0.1:8000/admin/ and
 log in using the default account (``username: admin, password:
@@ -168,7 +167,6 @@ Sites Using Drum
 .. _`Mezzanine Project`: http://mezzanine.jupo.org/
 .. _`pip`: http://www.pip-installer.org/
 .. _`FAQ section of the Mezzanine documentation`: http://mezzanine.jupo.org/docs/frequently-asked-questions.html#how-can-i-add-mezzanine-to-an-existing-django-project
-.. _`South`: http://south.aeracode.org/
 .. _`Django coding style`: http://docs.djangoproject.com/en/dev/internals/contributing/#coding-style
 .. _`PEP 8`: http://www.python.org/dev/peps/pep-0008/
 .. _`feedparser`: http://code.google.com/p/feedparser/
