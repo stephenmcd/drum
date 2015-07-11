@@ -74,10 +74,6 @@ ADMIN_MENU_ORDER = (
 #
 # BLOG_USE_FEATURED_IMAGE = True
 
-# If True, the south application will be automatically added to the
-# INSTALLED_APPS setting.
-USE_SOUTH = True
-
 
 ########################
 # MAIN DJANGO SETTINGS #
