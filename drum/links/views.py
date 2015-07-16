@@ -46,6 +46,10 @@ class UserFilterView(ListView):
             profile_user = get_object_or_404(users, **lookup)
             qs = context["object_list"].filter(user=profile_user)
             context["object_list"] = qs
+            # Update context_object_name variable
+            context_object_name = self.get_context_object_name(context["object_list"])
+            context[context_object_name] = context["object_list"]
+
         context["profile_user"] = profile_user
         context["no_data"] = ("Whoa, there's like, literally no data here, "
                               "like seriously, I totally got nothin.")
@@ -74,6 +78,9 @@ class ScoreOrderingView(UserFilterView):
             qs = qs.order_by("-" + self.date_field)
         context["object_list"] = paginate(qs, self.request.GET.get("page", 1),
             settings.ITEMS_PER_PAGE, settings.MAX_PAGING_LINKS)
+        # Update context_object_name variable
+        context_object_name = self.get_context_object_name(context["object_list"])
+        context[context_object_name] = context["object_list"]
         context["title"] = self.get_title(context)
         return context
 
