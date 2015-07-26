@@ -7,7 +7,7 @@ from drum import __version__ as version
 
 
 exclude = ["drum/project_template/dev.db",
-           "drum/project_template/local_settings.py"]
+           "drum/project_template/project_name/local_settings.py"]
 if sys.argv == ["setup.py", "test"]:
     exclude = []
 exclude = dict([(e, None) for e in exclude])
@@ -51,7 +51,7 @@ try:
         packages=find_packages(),
 
         install_requires=[
-            "mezzanine >= 4.0",
+            "mezzanine >= 4.0.1",
             "sphinx-me",
         ],
 
@@ -63,10 +63,10 @@ try:
             "License :: OSI Approved :: BSD License",
             "Operating System :: OS Independent",
             "Programming Language :: Python",
-            "Programming Language :: Python :: 2.6",
             "Programming Language :: Python :: 2.7",
             "Programming Language :: Python :: 3",
             "Programming Language :: Python :: 3.3",
+            "Programming Language :: Python :: 3.4",
             "Topic :: Internet :: WWW/HTTP",
             "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
             "Topic :: Internet :: WWW/HTTP :: WSGI",
