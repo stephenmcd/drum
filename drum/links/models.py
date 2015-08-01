@@ -5,6 +5,7 @@ from future.builtins import int
 from re import sub, split
 from time import time
 from operator import ior
+from functools import reduce
 
 try:
     from urllib.parse import urlparse
