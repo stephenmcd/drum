@@ -18,6 +18,7 @@ from django.db import models
 from django.db.models import Q
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.utils.encoding import python_2_unicode_compatible
 
 from mezzanine.accounts import get_profile_model
 from mezzanine.core.models import Displayable, Ownable
@@ -63,7 +64,7 @@ class Link(Displayable, Ownable):
             for keyword in Keyword.objects.filter(lookup):
                 self.keywords.add(AssignedKeyword(keyword=keyword))
 
-
+@python_2_unicode_compatible
 class Profile(models.Model):
 
     user = models.OneToOneField(USER_MODEL)
@@ -71,7 +72,7 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
     karma = models.IntegerField(default=0, editable=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s (%s)" % (self.user, self.karma)
 
 
