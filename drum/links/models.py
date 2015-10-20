@@ -95,6 +95,9 @@ def karma(sender, **kwargs):
     elif not kwargs["created"]:
         value *= 2 #  Rating changed
     content_object = rating.content_object
+    if content_object is None:
+        return
     if rating.user != content_object.user:
         queryset = get_profile_model().objects.filter(user=content_object.user)
         queryset.update(karma=models.F("karma") + value)
+
