@@ -209,7 +209,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.template.context_processors.tz",
                 "mezzanine.conf.context_processors.settings",
-                "mezzanine.pages.context_processors.page",
+                # "mezzanine.pages.context_processors.page",
             ],
             "builtins": [
                 "mezzanine.template.loader_tags",
@@ -270,7 +270,7 @@ MIDDLEWARE_CLASSES = (
     "mezzanine.core.middleware.SitePermissionMiddleware",
     # Uncomment the following if using any of the SSL settings:
     # "mezzanine.core.middleware.SSLRedirectMiddleware",
-    "mezzanine.pages.middleware.PageMiddleware",
+    # "mezzanine.pages.middleware.PageMiddleware",
     "mezzanine.core.middleware.FetchFromCacheMiddleware",
 )
 
