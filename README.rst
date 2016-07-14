@@ -94,12 +94,12 @@ given title is broken up into keywords, and if those keywords already
 exist as tags in the database, they're applied to the newly added link.
 
 This means that for auto-tagging to work, the tags must already exist
-in the database. You can either add them manually via the admin, or
-if you have a large number of existing links, you can use the
-``auto_tag`` management command Drum provides, which will analyse the
-titles of all your existing links, and provide tags it extracts from
-them. This makes use of the `topia.termextract`_ package which
-you'll first need to install::
+in the database. You can either add them manually via the admin (under
+the "Keywords" section), or if you have a large number of existing
+links, you can use the ``auto_tag`` management command Drum provides,
+which will analyse the titles of all your existing links, and provide
+tags it extracts from them. This makes use of the `topia.termextract`_
+package which you'll first need to install::
 
     python manage.py auto_tag --generate=100 --assign --remove
 
