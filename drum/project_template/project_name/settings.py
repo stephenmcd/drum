@@ -1,6 +1,8 @@
 
 from __future__ import absolute_import, unicode_literals
 import os
+
+from django import VERSION as DJANGO_VERSION
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -218,6 +220,10 @@ TEMPLATES = [
     },
 ]
 
+if DJANGO_VERSION < (1, 9):
+    del TEMPLATES[0]["OPTIONS"]["builtins"]
+
+
 ################
 # APPLICATIONS #
 ################
@@ -298,7 +304,7 @@ OPTIONAL_APPS = (
 ########
 
 # Drum-specific Mezzanine settings
-AUTH_PROFILE_MODULE = "links.Profile"
+ACCOUNTS_PROFILE_MODEL = "links.Profile"
 SITE_TITLE = "Drum"
 RATINGS_RANGE = (-1, 1)
 RATINGS_ACCOUNT_REQUIRED = True
