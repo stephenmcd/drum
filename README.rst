@@ -113,6 +113,12 @@ all tags in the database to all links in the database, as would occur
 if they were newly created. The ``--remove`` option will cause all
 existing tags to be removed.
 
+You can also define your own tag extraction function, if splitting the
+title on spaces doesn't suffice. To do so, define the setting
+``AUTO_TAG_FUNCTION`` which should contain a string with the Python
+dotted path to your custom tag function. The function will be given an
+unsaved ``Link`` object, and should return a sequence of tags to add.
+
 
 Contributing
 ============

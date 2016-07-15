@@ -1,5 +1,6 @@
-from __future__ import division
-from __future__ import unicode_literals
+from __future__ import division, unicode_literals
+
+from re import sub, split
 
 from django.conf import settings
 from django.utils.timezone import now
@@ -44,3 +45,14 @@ def order_by_score(queryset, score_fields, date_field, reverse=True):
             score = score_fields_sum / pow(age, scale)
             setattr(obj, "score", score)
         return sorted(queryset, key=lambda obj: obj.score, reverse=reverse)
+
+
+def auto_tag(link_obj):
+    """
+    Split's the link object's title into words. Default function for the
+    ``AUTO_TAG_FUNCTION`` setting.
+    """
+    variations = lambda word: [word,
+        sub("^([^A-Za-z0-9])*|([^A-Za-z0-9]|s)*$", "", word),
+        sub("^([^A-Za-z0-9])*|([^A-Za-z0-9])*$", "", word)]
+    return sum(map(variations, split("\s|/", link_obj.title)), [])
