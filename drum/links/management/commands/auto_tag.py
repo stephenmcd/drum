@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from string import punctuation
 
 from django.db import connection
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from mezzanine.generic.models import AssignedKeyword, Keyword
 from mezzanine.utils.urls import slugify
 
@@ -38,8 +38,7 @@ class Command(BaseCommand):
         try:
             from topia.termextract import extract
         except ImportError:
-            print("topia.termextract library required")
-            return
+            raise CommandError("topia.termextract library required")
 
         extractor = extract.TermExtractor()
         extractor.filter = extract.permissiveFilter
