@@ -56,7 +56,8 @@ class Command(BaseCommand):
                     obj = Link.objects.get(link=link["link"])
                 except Link.DoesNotExist:
                     obj = Link.objects.create(**link)
-                    obj.rating.add(Rating(value=1, user_id=user_id))
+                    obj.rating.add(Rating(value=1, user_id=user_id),
+                        bulk=False)
                     print "Added %s" % obj
 
     def link_from_entry(self, entry):

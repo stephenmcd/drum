@@ -61,7 +61,7 @@ class Link(Displayable, Ownable):
         if keywords:
             lookup = reduce(ior, [Q(title__iexact=k) for k in keywords])
             for keyword in Keyword.objects.filter(lookup):
-                self.keywords.add(AssignedKeyword(keyword=keyword), bulk=True)
+                self.keywords.add(AssignedKeyword(keyword=keyword), bulk=False)
 
 @python_2_unicode_compatible
 class Profile(models.Model):
