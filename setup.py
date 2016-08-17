@@ -51,7 +51,7 @@ try:
         packages=find_packages(),
 
         install_requires=[
-            "mezzanine >= 4.1.0",
+            "mezzanine >= 4.2.0",
             "sphinx-me",
         ],
 
