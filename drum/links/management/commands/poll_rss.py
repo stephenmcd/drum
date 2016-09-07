@@ -49,7 +49,7 @@ class Command(BaseCommand):
                     try:
                         link["link"] = self.follow_redirects(link["link"])
                     except Exception as e:
-                        print "%s - skipping %s" % (e, link["link"])
+                        print ("%s - skipping %s" % (e, link["link"]))
                         continue
                 link["user_id"] = user_id
                 try:
@@ -58,7 +58,7 @@ class Command(BaseCommand):
                     obj = Link.objects.create(**link)
                     obj.rating.add(Rating(value=1, user_id=user_id),
                         bulk=False)
-                    print "Added %s" % obj
+                    print ("Added %s" % obj)
 
     def link_from_entry(self, entry):
         """
@@ -86,7 +86,7 @@ class Command(BaseCommand):
 
     def follow_redirects(self, link):
         final = requests.get(link).url
-        print "followed %s to %s" % (link, final)
+        print ("followed %s to %s" % (link, final))
         return final
 
     def follow_old(self):
@@ -94,6 +94,6 @@ class Command(BaseCommand):
             try:
                 new_url = self.follow_redirects(link.link)
             except Exception as e:
-                print "%s - skipping %s" % (e, link.link)
+                print ("%s - skipping %s" % (e, link.link))
             else:
                 Link.objects.filter(id=link.id).update(link=new_url)
