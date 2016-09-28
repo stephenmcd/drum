@@ -43,6 +43,11 @@ fashion to ``django-admin.py``::
     $ cd project_name
     $ python manage.py createdb --noinput
     $ python manage.py runserver
+    # Here is the command to bind to 'all devices', in case you are running
+    # drum in a container
+    # You can choose whichever port you like. eg. 0.0.0.0:9876
+    $ python manage.py runserver 0.0.0.0:8000
+    
 
 Here we specify the ``-a`` switch for the ``mezzanine-project`` command,
 which tells it to use an alternative package (drum) for the project
