@@ -15,7 +15,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -74,9 +74,8 @@ class Profile(models.Model):
     def __str__(self):
         return "%s (%s)" % (self.user, self.karma)
 
-
 @receiver(post_save, sender=Rating)
-@receiver(post_delete, sender=Rating)
+@receiver(pre_delete, sender=Rating)
 def karma(sender, **kwargs):
     """
     Each time a rating is saved, check its value and modify the
@@ -93,7 +92,14 @@ def karma(sender, **kwargs):
         value *= -1 #  Rating deleted
     elif not kwargs["created"]:
         value *= 2 #  Rating changed
-    content_object = rating.content_object
-    if rating.user != content_object.user:
-        queryset = get_profile_model().objects.filter(user=content_object.user)
-        queryset.update(karma=models.F("karma") + value)
+    link_id = int(rating.object_pk)
+    try:
+        content_object = Link.objects.get(pk=link_id)
+    except Link.DoesNotExist:
+        content_object = None
+    else:
+        if rating.user != content_object.user:
+            queryset = get_profile_model().objects.filter(user=content_object.user)
+            queryset.update(karma=models.F("karma") + value)
+
+
