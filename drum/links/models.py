@@ -15,7 +15,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -76,7 +76,7 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=Rating)
-@receiver(post_delete, sender=Rating)
+@receiver(pre_delete, sender=Rating)
 def karma(sender, **kwargs):
     """
     Each time a rating is saved, check its value and modify the
