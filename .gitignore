@@ -6,3 +6,5 @@ syntax: glob
 local_settings.py
 
 *.pid
+.idea
+venv
