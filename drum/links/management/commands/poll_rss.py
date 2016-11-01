@@ -1,7 +1,6 @@
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 
 from datetime import datetime
-from optparse import make_option
 from time import mktime
 
 from django.contrib.auth.models import User
@@ -17,25 +16,25 @@ from drum.links.models import Link
 
 class Command(BaseCommand):
 
-    option_list = BaseCommand.option_list + (
-        make_option(
+    def add_arguments(self, parser):
+        parser.add_argument("urls", nargs="*")
+        parser.add_argument(
             "--follow",
             action="store_true",
             dest="follow",
             default=False,
             help="Make a HTTP request for every link imported and follow "
                  "redirects, storing the final URL."
-        ),
-        make_option(
+        )
+        parser.add_argument(
             "--follow-old",
             action="store_true",
             dest="follow_old",
             default=False,
             help="Will go back and run --follow aginst previously added links"
-        ),
-    )
+        )
 
-    def handle(self, *urls, **options):
+    def handle(self, **options):
         if options["follow_old"]:
             self.follow_old()
             return
@@ -43,22 +42,23 @@ class Command(BaseCommand):
             user_id = User.objects.filter(is_superuser=1)[0].id
         except IndexError:
             return
-        for url in urls:
+        for url in options["urls"]:
             for entry in parse(url).entries:
                 link = self.entry_to_link_dict(entry)
                 if options["follow"]:
                     try:
                         link["link"] = self.follow_redirects(link["link"])
                     except Exception as e:
-                        print "%s - skipping %s" % (e, link["link"])
+                        print("%s - skipping %s" % (e, link["link"]))
                         continue
                 link["user_id"] = user_id
                 try:
                     obj = Link.objects.get(link=link["link"])
                 except Link.DoesNotExist:
                     obj = Link.objects.create(**link)
-                    obj.rating.add(Rating(value=1, user_id=user_id))
-                    print "Added %s" % obj
+                    obj.rating.add(Rating(value=1, user_id=user_id),
+                        bulk=False)
+                    print("Added %s" % obj)
 
     def link_from_entry(self, entry):
         """
@@ -86,7 +86,7 @@ class Command(BaseCommand):
 
     def follow_redirects(self, link):
         final = requests.get(link).url
-        print "followed %s to %s" % (link, final)
+        print("followed %s to %s" % (link, final))
         return final
 
     def follow_old(self):
@@ -94,6 +94,6 @@ class Command(BaseCommand):
             try:
                 new_url = self.follow_redirects(link.link)
             except Exception as e:
-                print "%s - skipping %s" % (e, link.link)
+                print("%s - skipping %s" % (e, link.link))
             else:
                 Link.objects.filter(id=link.id).update(link=new_url)

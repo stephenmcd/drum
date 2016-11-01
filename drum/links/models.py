@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 from future import standard_library
 from future.builtins import int
 
-from re import sub, split
 from time import time
 from operator import ior
 from functools import reduce
@@ -16,7 +15,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -25,6 +24,7 @@ from mezzanine.core.models import Displayable, Ownable
 from mezzanine.core.request import current_request
 from mezzanine.generic.models import Rating, Keyword, AssignedKeyword
 from mezzanine.generic.fields import RatingField, CommentsField
+from mezzanine.utils.importing import import_dotted_path
 from mezzanine.utils.urls import slugify
 
 
@@ -54,15 +54,14 @@ class Link(Displayable, Ownable):
     def save(self, *args, **kwargs):
         keywords = []
         if not self.keywords_string and getattr(settings, "AUTO_TAG", False):
-            variations = lambda word: [word,
-                sub("^([^A-Za-z0-9])*|([^A-Za-z0-9]|s)*$", "", word),
-                sub("^([^A-Za-z0-9])*|([^A-Za-z0-9])*$", "", word)]
-            keywords = sum(map(variations, split("\s|/", self.title)), [])
+            func_name = getattr(settings, "AUTO_TAG_FUNCTION",
+                                "drum.links.utils.auto_tag")
+            keywords = import_dotted_path(func_name)(self)
         super(Link, self).save(*args, **kwargs)
         if keywords:
             lookup = reduce(ior, [Q(title__iexact=k) for k in keywords])
             for keyword in Keyword.objects.filter(lookup):
-                self.keywords.add(AssignedKeyword(keyword=keyword))
+                self.keywords.add(AssignedKeyword(keyword=keyword), bulk=False)
 
 @python_2_unicode_compatible
 class Profile(models.Model):
@@ -77,7 +76,7 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=Rating)
-@receiver(post_delete, sender=Rating)
+@receiver(pre_delete, sender=Rating)
 def karma(sender, **kwargs):
     """
     Each time a rating is saved, check its value and modify the

@@ -1,12 +1,12 @@
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 
 from drum.links.views import LinkList, LinkCreate, LinkDetail, CommentList, TagList
 
 
-urlpatterns = patterns("",
+urlpatterns = [
     url("^$",
         LinkList.as_view(),
         name="home"),
@@ -37,4 +37,4 @@ urlpatterns = patterns("",
     url("^tags/(?P<tag>.*)/$",
         LinkList.as_view(),
         name="link_list_tag"),
-)
+]

@@ -94,12 +94,12 @@ given title is broken up into keywords, and if those keywords already
 exist as tags in the database, they're applied to the newly added link.
 
 This means that for auto-tagging to work, the tags must already exist
-in the database. You can either add them manually via the admin, or
-if you have a large number of existing links, you can use the
-``auto_tag`` management command Drum provides, which will analyse the
-titles of all your existing links, and provide tags it extracts from
-them. This makes use of the `topia.termextract`_ package which
-you'll first need to install::
+in the database. You can either add them manually via the admin (under
+the "Keywords" section), or if you have a large number of existing
+links, you can use the ``auto_tag`` management command Drum provides,
+which will analyse the titles of all your existing links, and provide
+tags it extracts from them. This makes use of the `topia.termextract`_
+package which you'll first need to install::
 
     python manage.py auto_tag --generate=100 --assign --remove
 
@@ -112,6 +112,12 @@ Django admin interface. The ``--assign`` option will go back and assign
 all tags in the database to all links in the database, as would occur
 if they were newly created. The ``--remove`` option will cause all
 existing tags to be removed.
+
+You can also define your own tag extraction function, if splitting the
+title on spaces doesn't suffice. To do so, define the setting
+``AUTO_TAG_FUNCTION`` which should contain a string with the Python
+dotted path to your custom tag function. The function will be given an
+unsaved ``Link`` object, and should return a sequence of tags to add.
 
 
 Contributing

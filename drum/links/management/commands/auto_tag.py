@@ -1,10 +1,9 @@
 from __future__ import unicode_literals
 
-from optparse import make_option
 from string import punctuation
 
 from django.db import connection
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from mezzanine.generic.models import AssignedKeyword, Keyword
 from mezzanine.utils.urls import slugify
 
@@ -13,15 +12,14 @@ from drum.links.models import Link
 
 class Command(BaseCommand):
 
-    option_list = BaseCommand.option_list + (
-        make_option("--generate", dest="generate", type=int),
-        make_option("--remove", dest="remove", action="store_true",
-            default=False),
-        make_option("--assign", dest="assign", action="store_true",
-            default=False),
-    )
+    def add_arguments(self, parser):
+        parser.add_argument("--generate", dest="generate", type=int)
+        parser.add_argument("--remove", dest="remove", action="store_true",
+            default=False)
+        parser.add_argument("--assign", dest="assign", action="store_true",
+            default=False)
 
-    def handle(self, *urls, **options):
+    def handle(self, **options):
         cursor = connection.cursor()
         if options["remove"]:
             cursor.execute("DELETE FROM generic_assignedkeyword;")
@@ -40,8 +38,7 @@ class Command(BaseCommand):
         try:
             from topia.termextract import extract
         except ImportError:
-            print("topia.termextract library required")
-            return
+            raise CommandError("topia.termextract library required")
 
         extractor = extract.TermExtractor()
         extractor.filter = extract.permissiveFilter
