@@ -141,6 +141,15 @@ Please note the following guidelines for contributing:
   * If you are adding new functionality, you must include basic tests
     and documentation.
 
+
+Running the tests
+=================
+Install the dependencies specified in requirements.txt and run::
+
+    python runtests.py
+
+
+
 Donating
 ========
 
