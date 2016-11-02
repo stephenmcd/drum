@@ -142,13 +142,6 @@ Please note the following guidelines for contributing:
     and documentation.
 
 
-Running the tests
-=================
-Install the dependencies specified in requirements.txt and run::
-
-    python setup.py test
-
-
 Donating
 ========
 
