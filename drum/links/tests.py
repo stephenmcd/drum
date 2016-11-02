@@ -1,10 +1,46 @@
 from unittest import TestCase
-
+from drum.links.forms import LinkForm
 from django.contrib.auth.models import User
 from drum.links.models import Link, Profile
 
 
+class LinkFormsTests(TestCase):
+
+    def test_valid_data(self):
+        form = LinkForm({
+            "title": "Test title",
+            "link": "http://test.com/",
+            "description": "Test Desc",
+        })
+        self.assertTrue(form.is_valid())
+
+    def test_title_may_not_be_empty(self):
+        form = LinkForm({
+            "title": "",
+            "link": "http://test.com/",
+            "description": "Test Desc",
+        })
+        self.assertFalse(form.is_valid())
+
+    def test_link_may_be_empty(self):
+        form = LinkForm({
+            "title": "Test title",
+            "link": "",
+            "description": "Test Desc",
+        })
+        self.assertTrue(form.is_valid())
+
+    def test_description_may_be_empty(self):
+        form = LinkForm({
+            "title": "Test title",
+            "link": "http://test.com/",
+            "description": "",
+        })
+        self.assertTrue(form.is_valid())
+
+
 class LinkModelsTests(TestCase):
+
     def test_has_link_field(self):
         l = Link()
         self.assertTrue(hasattr(l, 'link'))
@@ -19,6 +55,7 @@ class LinkModelsTests(TestCase):
 
 
 class ProfileModelsTests(TestCase):
+
     def setUp(self):
         self.user = User.objects.create(username='user', password="notsosecure")
         self.user.profile.website = "http://test.com/"

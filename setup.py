@@ -49,6 +49,7 @@ try:
         zip_safe=False,
         include_package_data=True,
         packages=find_packages(),
+        test_suite="runtests.main",
 
         install_requires=[
             "mezzanine >= 4.2.0",

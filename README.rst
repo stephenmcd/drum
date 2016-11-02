@@ -146,8 +146,7 @@ Running the tests
 =================
 Install the dependencies specified in requirements.txt and run::
 
-    python runtests.py
-
+    python setup.py test
 
 
 Donating
