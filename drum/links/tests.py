@@ -1,4 +1,4 @@
-from unittest import TestCase
+from mezzanine.utils.tests import TestCase
 from drum.links.forms import LinkForm
 from django.contrib.auth.models import User
 from drum.links.models import Link, Profile
@@ -57,23 +57,21 @@ class LinkModelsTests(TestCase):
 class ProfileModelsTests(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create(username='user', password="notsosecure")
+        super(ProfileModelsTests, self).setUp()
+        self.user = User.objects.get(username='test')
         self.user.profile.website = "http://test.com/"
         self.user.profile.bio = "I have a dream"
         self.user.profile.karma = 777
         self.user.profile.save()
+        self.profile = Profile.objects.get(user__username="test")
 
     def test_has_website_field(self):
-        p = Profile.objects.get(user__username="user")
-        self.assertEqual("http://test.com/", p.website)
+        self.assertEqual("http://test.com/", self.profile.website)
 
     def test_has_bio_field(self):
-        p = Profile.objects.get(user__username="user")
-        self.assertEqual("I have a dream", p.bio)
+        p = Profile.objects.get(user__username="test")
+        self.assertEqual("I have a dream", self.profile.bio)
 
     def test_has_bio_field(self):
-        p = Profile.objects.get(user__username="user")
-        self.assertEqual(777, p.karma)
-
-    def tearDown(self):
-        self.user.delete()
+        p = Profile.objects.get(user__username="test")
+        self.assertEqual(777, self.profile.karma)
