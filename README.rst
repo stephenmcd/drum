@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/stephenmcd/drum.svg?branch=master)](https://travis-ci.org/stephenmcd/drum)
+[![B.. image:: https://secure.travis-ci.org/stephenmcd/drum.png?branch=master
+   :target: http://travis-ci.org/stephenmcd/drum
 
 Drum
 ====
