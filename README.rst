@@ -1,4 +1,4 @@
-[![B.. image:: https://secure.travis-ci.org/stephenmcd/drum.png?branch=master
+.. image:: https://secure.travis-ci.org/stephenmcd/drum.png?branch=master
    :target: http://travis-ci.org/stephenmcd/drum
 
 Drum
