@@ -26,13 +26,18 @@ def order_by_score(queryset, score_fields, date_field, reverse=True):
         "mysql": "UNIX_TIMESTAMP(%s)",
         "postgresql_psycopg2": "EXTRACT(EPOCH FROM %s)" ,
     }
+    now_tz_sqls = {
+        "mysql": "UTC_TIMESTAMP()",
+        "postgresql_psycopg2": "NOW() AT TIME ZONE 'utc'",
+    }
     db_engine = settings.DATABASES[queryset.db]["ENGINE"].rsplit(".", 1)[1]
     timestamp_sql = timestamp_sqls.get(db_engine)
+    now_sql = now_tz_sqls.get(db_engine) if settings.USE_TZ else "NOW()",
 
-    if timestamp_sql:
+    if timestamp_sql and now_sql:
         score_sql = "(%s) / POW(%s - %s, %s)" % (
             " + ".join(score_fields),
-            timestamp_sql % "NOW()",
+            timestamp_sql % now_sql,
             timestamp_sql % date_field,
             scale,
         )
