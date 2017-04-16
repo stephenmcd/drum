@@ -243,12 +243,12 @@ INSTALLED_APPS = (
     "mezzanine.core",
     "mezzanine.generic",
     "mezzanine.accounts",
-    #"mezzanine.blog",
-    #"mezzanine.forms",
-    #"mezzanine.pages",
-    #"mezzanine.galleries",
-    #"mezzanine.twitter",
-    #"mezzanine.mobile",
+    "mezzanine.blog",
+    "mezzanine.forms",
+    "mezzanine.pages",
+    "mezzanine.galleries",
+    "mezzanine.twitter",
+    "mezzanine.mobile",
 )
 
 
