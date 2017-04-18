@@ -74,7 +74,6 @@ class Profile(models.Model):
     def __str__(self):
         return "%s (%s)" % (self.user, self.karma)
 
-
 @receiver(post_save, sender=Rating)
 @receiver(pre_delete, sender=Rating)
 def karma(sender, **kwargs):
